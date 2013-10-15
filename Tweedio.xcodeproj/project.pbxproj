@@ -1,0 +1,580 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D6615EC2180AF57400F83331 /* Warp1.caf in Resources */ = {isa = PBXBuildFile; fileRef = D6615EC1180AF57400F83331 /* Warp1.caf */; };
+		D6615EC5180B0D3800F83331 /* voice_of_light.caf in Resources */ = {isa = PBXBuildFile; fileRef = D6615EC4180B0D3800F83331 /* voice_of_light.caf */; };
+		D68EE25317FF21E6007AEED2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE25217FF21E6007AEED2 /* Foundation.framework */; };
+		D68EE25517FF21E6007AEED2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE25417FF21E6007AEED2 /* CoreGraphics.framework */; };
+		D68EE25717FF21E6007AEED2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE25617FF21E6007AEED2 /* UIKit.framework */; };
+		D68EE25917FF21E6007AEED2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE25817FF21E6007AEED2 /* CoreData.framework */; };
+		D68EE25F17FF21E6007AEED2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D68EE25D17FF21E6007AEED2 /* InfoPlist.strings */; };
+		D68EE26117FF21E6007AEED2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D68EE26017FF21E6007AEED2 /* main.m */; };
+		D68EE26517FF21E6007AEED2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D68EE26417FF21E6007AEED2 /* AppDelegate.m */; };
+		D68EE26817FF21E6007AEED2 /* Tweedio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D68EE26617FF21E6007AEED2 /* Tweedio.xcdatamodeld */; };
+		D68EE26A17FF21E6007AEED2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D68EE26917FF21E6007AEED2 /* Images.xcassets */; };
+		D68EE27117FF21E6007AEED2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE27017FF21E6007AEED2 /* XCTest.framework */; };
+		D68EE27217FF21E6007AEED2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE25217FF21E6007AEED2 /* Foundation.framework */; };
+		D68EE27317FF21E6007AEED2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE25617FF21E6007AEED2 /* UIKit.framework */; };
+		D68EE27417FF21E7007AEED2 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE25817FF21E6007AEED2 /* CoreData.framework */; };
+		D68EE27C17FF21E7007AEED2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D68EE27A17FF21E7007AEED2 /* InfoPlist.strings */; };
+		D68EE27E17FF21E7007AEED2 /* TweedioTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D68EE27D17FF21E7007AEED2 /* TweedioTests.m */; };
+		D68EE28917FF227C007AEED2 /* TwitterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D68EE28817FF227C007AEED2 /* TwitterManager.m */; };
+		D68EE28D17FF2593007AEED2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE28C17FF2593007AEED2 /* Social.framework */; };
+		D68EE28E17FF29EB007AEED2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE28A17FF2298007AEED2 /* Accounts.framework */; };
+		D6A3097D1802C3A5003CCD09 /* TweetData.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A3097C1802C3A5003CCD09 /* TweetData.m */; };
+		D6A4148E18095946005EA37A /* voice_of_light.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6A4148D18095946005EA37A /* voice_of_light.mp3 */; };
+		D6A4C2BE1802B09F00590813 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A4C2BD1802B09F00590813 /* AudioToolbox.framework */; };
+		D6A4C2C11802B34500590813 /* bell01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6A4C2C01802B34500590813 /* bell01.mp3 */; };
+		D6AC523D18028E2500016648 /* TweetUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC523C18028E2500016648 /* TweetUtil.m */; };
+		D6AC52431802925500016648 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC52411802925500016648 /* MainViewController.m */; };
+		D6AC52441802925500016648 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6AC52421802925500016648 /* MainViewController.xib */; };
+		D6AC524818029B6800016648 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC524618029B6800016648 /* SettingViewController.m */; };
+		D6AC524918029B6800016648 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6AC524718029B6800016648 /* SettingViewController.xib */; };
+		D6AC524C18029BFC00016648 /* SettingData.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC524B18029BFC00016648 /* SettingData.m */; };
+		D6AC524F1802A09000016648 /* SettingDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC524E1802A09000016648 /* SettingDataManager.m */; };
+		D6AEA95E18084D17004ADB9B /* Warp1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6AEA95D18084D17004ADB9B /* Warp1.mp3 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D68EE27517FF21E7007AEED2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D68EE24717FF21E6007AEED2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D68EE24E17FF21E6007AEED2;
+			remoteInfo = Tweedio;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D6615EC1180AF57400F83331 /* Warp1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Warp1.caf; sourceTree = "<group>"; };
+		D6615EC4180B0D3800F83331 /* voice_of_light.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = voice_of_light.caf; sourceTree = "<group>"; };
+		D68EE24F17FF21E6007AEED2 /* Tweedio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tweedio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D68EE25217FF21E6007AEED2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D68EE25417FF21E6007AEED2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D68EE25617FF21E6007AEED2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D68EE25817FF21E6007AEED2 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D68EE25C17FF21E6007AEED2 /* Tweedio-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tweedio-Info.plist"; sourceTree = "<group>"; };
+		D68EE25E17FF21E6007AEED2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D68EE26017FF21E6007AEED2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D68EE26217FF21E6007AEED2 /* Tweedio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tweedio-Prefix.pch"; sourceTree = "<group>"; };
+		D68EE26317FF21E6007AEED2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D68EE26417FF21E6007AEED2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D68EE26717FF21E6007AEED2 /* Tweedio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tweedio.xcdatamodel; sourceTree = "<group>"; };
+		D68EE26917FF21E6007AEED2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D68EE26F17FF21E6007AEED2 /* TweedioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TweedioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D68EE27017FF21E6007AEED2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D68EE27917FF21E7007AEED2 /* TweedioTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TweedioTests-Info.plist"; sourceTree = "<group>"; };
+		D68EE27B17FF21E7007AEED2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D68EE27D17FF21E7007AEED2 /* TweedioTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TweedioTests.m; sourceTree = "<group>"; };
+		D68EE28717FF227C007AEED2 /* TwitterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterManager.h; sourceTree = "<group>"; };
+		D68EE28817FF227C007AEED2 /* TwitterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterManager.m; sourceTree = "<group>"; };
+		D68EE28A17FF2298007AEED2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		D68EE28C17FF2593007AEED2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		D6A3097B1802C3A5003CCD09 /* TweetData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetData.h; sourceTree = "<group>"; };
+		D6A3097C1802C3A5003CCD09 /* TweetData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetData.m; sourceTree = "<group>"; };
+		D6A4148D18095946005EA37A /* voice_of_light.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voice_of_light.mp3; sourceTree = "<group>"; };
+		D6A4C2BD1802B09F00590813 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D6A4C2C01802B34500590813 /* bell01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell01.mp3; sourceTree = "<group>"; };
+		D6AC523B18028E2500016648 /* TweetUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetUtil.h; sourceTree = "<group>"; };
+		D6AC523C18028E2500016648 /* TweetUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetUtil.m; sourceTree = "<group>"; };
+		D6AC52401802925500016648 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		D6AC52411802925500016648 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		D6AC52421802925500016648 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		D6AC524518029B6800016648 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		D6AC524618029B6800016648 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		D6AC524718029B6800016648 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
+		D6AC524A18029BFC00016648 /* SettingData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingData.h; sourceTree = "<group>"; };
+		D6AC524B18029BFC00016648 /* SettingData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingData.m; sourceTree = "<group>"; };
+		D6AC524D1802A09000016648 /* SettingDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingDataManager.h; sourceTree = "<group>"; };
+		D6AC524E1802A09000016648 /* SettingDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingDataManager.m; sourceTree = "<group>"; };
+		D6AEA95D18084D17004ADB9B /* Warp1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Warp1.mp3; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D68EE24C17FF21E6007AEED2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6A4C2BE1802B09F00590813 /* AudioToolbox.framework in Frameworks */,
+				D68EE28E17FF29EB007AEED2 /* Accounts.framework in Frameworks */,
+				D68EE28D17FF2593007AEED2 /* Social.framework in Frameworks */,
+				D68EE25517FF21E6007AEED2 /* CoreGraphics.framework in Frameworks */,
+				D68EE25917FF21E6007AEED2 /* CoreData.framework in Frameworks */,
+				D68EE25717FF21E6007AEED2 /* UIKit.framework in Frameworks */,
+				D68EE25317FF21E6007AEED2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D68EE26C17FF21E6007AEED2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D68EE27117FF21E6007AEED2 /* XCTest.framework in Frameworks */,
+				D68EE27417FF21E7007AEED2 /* CoreData.framework in Frameworks */,
+				D68EE27317FF21E6007AEED2 /* UIKit.framework in Frameworks */,
+				D68EE27217FF21E6007AEED2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D68EE24617FF21E6007AEED2 = {
+			isa = PBXGroup;
+			children = (
+				D68EE25A17FF21E6007AEED2 /* Tweedio */,
+				D68EE27717FF21E7007AEED2 /* TweedioTests */,
+				D68EE25117FF21E6007AEED2 /* Frameworks */,
+				D68EE25017FF21E6007AEED2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D68EE25017FF21E6007AEED2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D68EE24F17FF21E6007AEED2 /* Tweedio.app */,
+				D68EE26F17FF21E6007AEED2 /* TweedioTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D68EE25117FF21E6007AEED2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D6A4C2BD1802B09F00590813 /* AudioToolbox.framework */,
+				D68EE28C17FF2593007AEED2 /* Social.framework */,
+				D68EE28A17FF2298007AEED2 /* Accounts.framework */,
+				D68EE25217FF21E6007AEED2 /* Foundation.framework */,
+				D68EE25417FF21E6007AEED2 /* CoreGraphics.framework */,
+				D68EE25617FF21E6007AEED2 /* UIKit.framework */,
+				D68EE25817FF21E6007AEED2 /* CoreData.framework */,
+				D68EE27017FF21E6007AEED2 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D68EE25A17FF21E6007AEED2 /* Tweedio */ = {
+			isa = PBXGroup;
+			children = (
+				D68EE26317FF21E6007AEED2 /* AppDelegate.h */,
+				D68EE26417FF21E6007AEED2 /* AppDelegate.m */,
+				D68EE26917FF21E6007AEED2 /* Images.xcassets */,
+				D68EE26617FF21E6007AEED2 /* Tweedio.xcdatamodeld */,
+				D68EE25B17FF21E6007AEED2 /* Supporting Files */,
+				D68EE28717FF227C007AEED2 /* TwitterManager.h */,
+				D68EE28817FF227C007AEED2 /* TwitterManager.m */,
+				D6AC524D1802A09000016648 /* SettingDataManager.h */,
+				D6AC524E1802A09000016648 /* SettingDataManager.m */,
+				D6AC523B18028E2500016648 /* TweetUtil.h */,
+				D6AC523C18028E2500016648 /* TweetUtil.m */,
+				D6AC52401802925500016648 /* MainViewController.h */,
+				D6AC52411802925500016648 /* MainViewController.m */,
+				D6AC52421802925500016648 /* MainViewController.xib */,
+				D6AC524518029B6800016648 /* SettingViewController.h */,
+				D6AC524618029B6800016648 /* SettingViewController.m */,
+				D6AC524718029B6800016648 /* SettingViewController.xib */,
+				D6AC524A18029BFC00016648 /* SettingData.h */,
+				D6AC524B18029BFC00016648 /* SettingData.m */,
+				D6A3097B1802C3A5003CCD09 /* TweetData.h */,
+				D6A3097C1802C3A5003CCD09 /* TweetData.m */,
+				D6A4C2BF1802B33300590813 /* resources */,
+			);
+			path = Tweedio;
+			sourceTree = "<group>";
+		};
+		D68EE25B17FF21E6007AEED2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D68EE25C17FF21E6007AEED2 /* Tweedio-Info.plist */,
+				D68EE25D17FF21E6007AEED2 /* InfoPlist.strings */,
+				D68EE26017FF21E6007AEED2 /* main.m */,
+				D68EE26217FF21E6007AEED2 /* Tweedio-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D68EE27717FF21E7007AEED2 /* TweedioTests */ = {
+			isa = PBXGroup;
+			children = (
+				D68EE27D17FF21E7007AEED2 /* TweedioTests.m */,
+				D68EE27817FF21E7007AEED2 /* Supporting Files */,
+			);
+			path = TweedioTests;
+			sourceTree = "<group>";
+		};
+		D68EE27817FF21E7007AEED2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D68EE27917FF21E7007AEED2 /* TweedioTests-Info.plist */,
+				D68EE27A17FF21E7007AEED2 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D6A4C2BF1802B33300590813 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				D6615EC4180B0D3800F83331 /* voice_of_light.caf */,
+				D6615EC1180AF57400F83331 /* Warp1.caf */,
+				D6A4148D18095946005EA37A /* voice_of_light.mp3 */,
+				D6A4C2C01802B34500590813 /* bell01.mp3 */,
+				D6AEA95D18084D17004ADB9B /* Warp1.mp3 */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D68EE24E17FF21E6007AEED2 /* Tweedio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D68EE28117FF21E7007AEED2 /* Build configuration list for PBXNativeTarget "Tweedio" */;
+			buildPhases = (
+				D68EE24B17FF21E6007AEED2 /* Sources */,
+				D68EE24C17FF21E6007AEED2 /* Frameworks */,
+				D68EE24D17FF21E6007AEED2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tweedio;
+			productName = Tweedio;
+			productReference = D68EE24F17FF21E6007AEED2 /* Tweedio.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D68EE26E17FF21E6007AEED2 /* TweedioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D68EE28417FF21E7007AEED2 /* Build configuration list for PBXNativeTarget "TweedioTests" */;
+			buildPhases = (
+				D68EE26B17FF21E6007AEED2 /* Sources */,
+				D68EE26C17FF21E6007AEED2 /* Frameworks */,
+				D68EE26D17FF21E6007AEED2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D68EE27617FF21E7007AEED2 /* PBXTargetDependency */,
+			);
+			name = TweedioTests;
+			productName = TweedioTests;
+			productReference = D68EE26F17FF21E6007AEED2 /* TweedioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D68EE24717FF21E6007AEED2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "shunsuke sato";
+				TargetAttributes = {
+					D68EE24E17FF21E6007AEED2 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+					D68EE26E17FF21E6007AEED2 = {
+						TestTargetID = D68EE24E17FF21E6007AEED2;
+					};
+				};
+			};
+			buildConfigurationList = D68EE24A17FF21E6007AEED2 /* Build configuration list for PBXProject "Tweedio" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D68EE24617FF21E6007AEED2;
+			productRefGroup = D68EE25017FF21E6007AEED2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D68EE24E17FF21E6007AEED2 /* Tweedio */,
+				D68EE26E17FF21E6007AEED2 /* TweedioTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D68EE24D17FF21E6007AEED2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6AEA95E18084D17004ADB9B /* Warp1.mp3 in Resources */,
+				D68EE25F17FF21E6007AEED2 /* InfoPlist.strings in Resources */,
+				D6A4148E18095946005EA37A /* voice_of_light.mp3 in Resources */,
+				D6AC52441802925500016648 /* MainViewController.xib in Resources */,
+				D6615EC2180AF57400F83331 /* Warp1.caf in Resources */,
+				D68EE26A17FF21E6007AEED2 /* Images.xcassets in Resources */,
+				D6615EC5180B0D3800F83331 /* voice_of_light.caf in Resources */,
+				D6A4C2C11802B34500590813 /* bell01.mp3 in Resources */,
+				D6AC524918029B6800016648 /* SettingViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D68EE26D17FF21E6007AEED2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D68EE27C17FF21E7007AEED2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D68EE24B17FF21E6007AEED2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6AC524C18029BFC00016648 /* SettingData.m in Sources */,
+				D68EE26517FF21E6007AEED2 /* AppDelegate.m in Sources */,
+				D6AC52431802925500016648 /* MainViewController.m in Sources */,
+				D6AC523D18028E2500016648 /* TweetUtil.m in Sources */,
+				D6AC524F1802A09000016648 /* SettingDataManager.m in Sources */,
+				D6A3097D1802C3A5003CCD09 /* TweetData.m in Sources */,
+				D6AC524818029B6800016648 /* SettingViewController.m in Sources */,
+				D68EE28917FF227C007AEED2 /* TwitterManager.m in Sources */,
+				D68EE26817FF21E6007AEED2 /* Tweedio.xcdatamodeld in Sources */,
+				D68EE26117FF21E6007AEED2 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D68EE26B17FF21E6007AEED2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D68EE27E17FF21E7007AEED2 /* TweedioTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D68EE27617FF21E7007AEED2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D68EE24E17FF21E6007AEED2 /* Tweedio */;
+			targetProxy = D68EE27517FF21E7007AEED2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D68EE25D17FF21E6007AEED2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D68EE25E17FF21E6007AEED2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D68EE27A17FF21E7007AEED2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D68EE27B17FF21E7007AEED2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D68EE27F17FF21E7007AEED2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shunsuke Sato (F2H8C455BK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shunsuke Sato (F2H8C455BK)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D68EE28017FF21E7007AEED2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shunsuke Sato (F2H8C455BK)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D68EE28217FF21E7007AEED2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tweedio/Tweedio-Prefix.pch";
+				INFOPLIST_FILE = "Tweedio/Tweedio-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D68EE28317FF21E7007AEED2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tweedio/Tweedio-Prefix.pch";
+				INFOPLIST_FILE = "Tweedio/Tweedio-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D68EE28517FF21E7007AEED2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Tweedio.app/Tweedio";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tweedio/Tweedio-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "TweedioTests/TweedioTests-Info.plist";
+				PRODUCT_NAME = TweedioTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		D68EE28617FF21E7007AEED2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Tweedio.app/Tweedio";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Tweedio/Tweedio-Prefix.pch";
+				INFOPLIST_FILE = "TweedioTests/TweedioTests-Info.plist";
+				PRODUCT_NAME = TweedioTests;
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D68EE24A17FF21E6007AEED2 /* Build configuration list for PBXProject "Tweedio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D68EE27F17FF21E7007AEED2 /* Debug */,
+				D68EE28017FF21E7007AEED2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D68EE28117FF21E7007AEED2 /* Build configuration list for PBXNativeTarget "Tweedio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D68EE28217FF21E7007AEED2 /* Debug */,
+				D68EE28317FF21E7007AEED2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D68EE28417FF21E7007AEED2 /* Build configuration list for PBXNativeTarget "TweedioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D68EE28517FF21E7007AEED2 /* Debug */,
+				D68EE28617FF21E7007AEED2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D68EE26617FF21E6007AEED2 /* Tweedio.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D68EE26717FF21E6007AEED2 /* Tweedio.xcdatamodel */,
+			);
+			currentVersion = D68EE26717FF21E6007AEED2 /* Tweedio.xcdatamodel */;
+			path = Tweedio.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = D68EE24717FF21E6007AEED2 /* Project object */;
+}
