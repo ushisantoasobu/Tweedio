@@ -47,6 +47,10 @@ typedef enum TweetPlayPart:NSInteger {
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *ai;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *psc;
+
+@property (weak, nonatomic) IBOutlet UISlider *sl;
+
 
 
 
@@ -80,7 +84,19 @@ typedef enum TweetPlayPart:NSInteger {
     [[TwitterManager sharedManager] isAuthenticated];
     [self showLoading];
     [[TwitterManager sharedManager] requestTimeline:0];
-
+    
+    SettingData *data = [SettingDataManager getData];
+    self.settingData = data;
+    if (data.rate == AVSpeechUtteranceMaximumSpeechRate) {
+        [self.psc setSelectedSegmentIndex:2];
+    } else if (data.rate == AVSpeechUtteranceDefaultSpeechRate) {
+        [self.psc setSelectedSegmentIndex:1];
+    } else {
+        [self.psc setSelectedSegmentIndex:0];
+    }
+    
+    self.sl.value = data.pitchMultiplier;
+    
     return;
     
     BOOL isAuthenticated = [[TwitterManager sharedManager] isAuthenticated];
@@ -279,6 +295,7 @@ typedef enum TweetPlayPart:NSInteger {
     } else {
         self.settingData.rate =AVSpeechUtteranceMaximumSpeechRate;
     }
+    [SettingDataManager setRate:self.settingData.rate];
 }
 
 
@@ -286,6 +303,7 @@ typedef enum TweetPlayPart:NSInteger {
     UISlider *slider = (UISlider *)sender;
 //    NSLog(@"%f", slider.value);
     self.settingData.pitchMultiplier = slider.value;
+    [SettingDataManager setPitch:self.settingData.pitchMultiplier];
 }
 
 #pragma mark - loading
@@ -372,13 +390,6 @@ typedef enum TweetPlayPart:NSInteger {
     [NSThread sleepForTimeInterval:0.8f];
     NSLog(@"favorite success");
     [self next];
-}
-
-#pragma mark - SettingViewDelegate
-
-- (void)settingViewDidSet:(SettingData *)data {
-    self.settingData = data;
-    [SettingDataManager setData:data];
 }
 
 @end

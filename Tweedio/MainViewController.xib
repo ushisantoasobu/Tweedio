@@ -7,6 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
                 <outlet property="ai" destination="Sra-pM-4wr" id="Xi2-1c-TPk"/>
+                <outlet property="psc" destination="ajI-Jf-mce" id="hPD-4l-dK3"/>
+                <outlet property="sl" destination="gpM-zY-k45" id="z9X-fg-Vqj"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>

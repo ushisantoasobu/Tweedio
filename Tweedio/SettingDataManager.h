@@ -13,6 +13,9 @@
 
 +(SettingData *)getData;
 
-+(BOOL)setData:(SettingData *)data;
+//+(BOOL)setData:(SettingData *)data;
+
++(BOOL)setRate:(float)rate;
++(BOOL)setPitch:(float)pitch;
 
 @end
