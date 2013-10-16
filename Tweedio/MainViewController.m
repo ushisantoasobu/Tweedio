@@ -323,6 +323,9 @@ typedef enum TweetPlayPart:NSInteger {
         NSLog(@"データがないのでお気に入りできないっす");
         return;
     }
+    
+    [self stop];
+    
     TweetData *data = [self.tweedDataList objectAtIndex:self.currentIndex];
     [self showLoading];
     [[TwitterManager sharedManager] requestCreateFavorite:data.serialId];
@@ -351,6 +354,7 @@ typedef enum TweetPlayPart:NSInteger {
 - (void)twitterManagerDidUpdate:(NSMutableArray *)list {
     [self hideLoading];
     [self ringComplte];
+    [NSThread sleepForTimeInterval:0.8f];
     self.tweedDataList = list;
     [self play];
 }
@@ -365,8 +369,9 @@ typedef enum TweetPlayPart:NSInteger {
 - (void)twitterManagerDidFavorite {
     [self hideLoading];
     [self ringComplte];
-    //音でも鳴らす？？
+    [NSThread sleepForTimeInterval:0.8f];
     NSLog(@"favorite success");
+    [self next];
 }
 
 #pragma mark - SettingViewDelegate
