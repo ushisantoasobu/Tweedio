@@ -104,7 +104,6 @@
                     </state>
                     <connections>
                         <action selector="respondToBtnPlay:" destination="-1" eventType="touchUpInside" id="hH9-Yr-STL"/>
-                        <action selector="respondToBtnStop:" destination="-1" eventType="touchUpInside" id="pLe-e6-UWb"/>
                     </connections>
                 </button>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Sra-pM-4wr">

@@ -24,7 +24,9 @@
 
 typedef enum TweetPlayPart:NSInteger {
     TWEET_PLAY_PART_USER,
-    TWEET_PLAY_PART_BODY
+    TWEET_PLAY_PART_BODY,
+    TWEET_PLAY_EMPTY,
+    TWEET_PLAY_EMPTY_NEXT_USER
 } TweetPlayPart;
 
 //現在のツイート読み上げ箇所
@@ -144,7 +146,27 @@ typedef enum TweetPlayPart:NSInteger {
 }
 
 - (IBAction)respondToBtnNext:(id)sender {
-    [self next];
+    if([self.tweedDataList count] == 0){
+        return;
+    }
+    
+    if(self.currentIndex == [self.tweedDataList count] - 1){
+        return;
+    }
+    
+    self.currentIndex++;
+    self.currentTweetplayPart = TWEET_PLAY_EMPTY_NEXT_USER;
+    
+    //なんかとまらなかったので強引な方法？？記事も見つからず・・・
+    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:nil];
+    [utterance setRate              :self.settingData.rate];
+    [utterance setPitchMultiplier   :self.settingData.pitchMultiplier];
+    AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
+    [utterance setVoice:voice];
+    [self.synthesizer speakUtterance:utterance];
+    //
+    
+    [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
 }
 
 - (IBAction)respondToBtnFavorite:(id)sender {
@@ -227,14 +249,17 @@ typedef enum TweetPlayPart:NSInteger {
 //停止する
 - (void)stop {
     if([self.synthesizer isSpeaking]) {
-        AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:nil];
+        
+        self.currentTweetplayPart = TWEET_PLAY_EMPTY;
         
         //なんかとまらなかったので強引な方法？？記事も見つからず・・・
+        AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:nil];
         [utterance setRate              :self.settingData.rate];
         [utterance setPitchMultiplier   :self.settingData.pitchMultiplier];
         AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
         [utterance setVoice:voice];
         [self.synthesizer speakUtterance:utterance];
+        //
         
         [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
     }
@@ -273,8 +298,8 @@ typedef enum TweetPlayPart:NSInteger {
         return;
     }
     
-    [self stop];
     self.currentIndex++;
+    [self stop];
     
     [NSThread sleepForTimeInterval:0.4f];
     [self ring];
@@ -361,8 +386,18 @@ typedef enum TweetPlayPart:NSInteger {
         [NSThread sleepForTimeInterval:0.5f];
         self.currentTweetplayPart = TWEET_PLAY_PART_BODY;
         [self play];
-    } else {
+    } else if (self.currentTweetplayPart == TWEET_PLAY_PART_BODY) {
         [self next];
+    } else if (self.currentTweetplayPart == TWEET_PLAY_EMPTY) {
+        self.currentTweetplayPart = TWEET_PLAY_PART_USER;
+    } else if (self.currentTweetplayPart == TWEET_PLAY_EMPTY_NEXT_USER) {
+        self.currentTweetplayPart = TWEET_PLAY_PART_USER;
+        [NSThread sleepForTimeInterval:0.4f];
+        [self ring];
+        [NSThread sleepForTimeInterval:1.4f];
+        
+        self.currentTweetplayPart = TWEET_PLAY_PART_USER;
+        [self play];
     }
 }
 
