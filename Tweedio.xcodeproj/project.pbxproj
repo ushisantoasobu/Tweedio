@@ -34,8 +34,6 @@
 		D6AC523D18028E2500016648 /* TweetUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC523C18028E2500016648 /* TweetUtil.m */; };
 		D6AC52431802925500016648 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC52411802925500016648 /* MainViewController.m */; };
 		D6AC52441802925500016648 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6AC52421802925500016648 /* MainViewController.xib */; };
-		D6AC524818029B6800016648 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC524618029B6800016648 /* SettingViewController.m */; };
-		D6AC524918029B6800016648 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6AC524718029B6800016648 /* SettingViewController.xib */; };
 		D6AC524C18029BFC00016648 /* SettingData.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC524B18029BFC00016648 /* SettingData.m */; };
 		D6AC524F1802A09000016648 /* SettingDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC524E1802A09000016648 /* SettingDataManager.m */; };
 		D6AEA95E18084D17004ADB9B /* Warp1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6AEA95D18084D17004ADB9B /* Warp1.mp3 */; };
@@ -86,9 +84,6 @@
 		D6AC52401802925500016648 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		D6AC52411802925500016648 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		D6AC52421802925500016648 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		D6AC524518029B6800016648 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
-		D6AC524618029B6800016648 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
-		D6AC524718029B6800016648 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		D6AC524A18029BFC00016648 /* SettingData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingData.h; sourceTree = "<group>"; };
 		D6AC524B18029BFC00016648 /* SettingData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingData.m; sourceTree = "<group>"; };
 		D6AC524D1802A09000016648 /* SettingDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingDataManager.h; sourceTree = "<group>"; };
@@ -176,9 +171,6 @@
 				D6AC52401802925500016648 /* MainViewController.h */,
 				D6AC52411802925500016648 /* MainViewController.m */,
 				D6AC52421802925500016648 /* MainViewController.xib */,
-				D6AC524518029B6800016648 /* SettingViewController.h */,
-				D6AC524618029B6800016648 /* SettingViewController.m */,
-				D6AC524718029B6800016648 /* SettingViewController.xib */,
 				D6AC524A18029BFC00016648 /* SettingData.h */,
 				D6AC524B18029BFC00016648 /* SettingData.m */,
 				D6A3097B1802C3A5003CCD09 /* TweetData.h */,
@@ -319,7 +311,6 @@
 				D68EE26A17FF21E6007AEED2 /* Images.xcassets in Resources */,
 				D6615EC5180B0D3800F83331 /* voice_of_light.caf in Resources */,
 				D6A4C2C11802B34500590813 /* bell01.mp3 in Resources */,
-				D6AC524918029B6800016648 /* SettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,7 +335,6 @@
 				D6AC523D18028E2500016648 /* TweetUtil.m in Sources */,
 				D6AC524F1802A09000016648 /* SettingDataManager.m in Sources */,
 				D6A3097D1802C3A5003CCD09 /* TweetData.m in Sources */,
-				D6AC524818029B6800016648 /* SettingViewController.m in Sources */,
 				D68EE28917FF227C007AEED2 /* TwitterManager.m in Sources */,
 				D68EE26817FF21E6007AEED2 /* Tweedio.xcdatamodeld in Sources */,
 				D68EE26117FF21E6007AEED2 /* main.m in Sources */,
