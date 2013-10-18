@@ -43,8 +43,6 @@ typedef enum NextAction:NSInteger {
 //読み上げモジュール
 @property (nonatomic, strong) AVSpeechSynthesizer *synthesizer;
 
-//設定ビュー
-@property (nonatomic, weak) SettingViewController *svc;
 
 //サウンド
 //@property (nonatomic, strong) SystemSoundID *sound;

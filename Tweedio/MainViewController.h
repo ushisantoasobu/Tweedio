@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "TwitterManager.h"
-#import "SettingViewController.h"
 #import "SettingDataManager.h"
 #import "TweetData.h"
 
 @interface MainViewController : UIViewController<AVSpeechSynthesizerDelegate,
-TwitterManagerDelegate,
-SettingViewDelegate>
+TwitterManagerDelegate>
 
 @end
