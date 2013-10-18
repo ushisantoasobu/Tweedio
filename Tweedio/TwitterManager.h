@@ -12,24 +12,20 @@
 @protocol TwitterManagerDelegate <NSObject>
 
 @optional
-- (void)twitterManagerDidUpdate:(NSMutableArray *)list;
-- (void)twitterManagerDidLoad:(NSMutableArray *)list;
+- (void)twitterManagerDidAuthenticated:(BOOL)boolean;
+- (void)twitterManagerDidUpdateTimeline:(NSMutableArray *)list;
 - (void)twitterManagerDidFavorite;
+- (void)twitterManagerDidApiError;
 @end
 
 @interface TwitterManager : NSObject
 
 @property id <TwitterManagerDelegate> delegate;
 
-//twitterアカウント情報が設定されているか
-
 +(TwitterManager*)sharedManager;
 
 -(BOOL)isAuthenticated;
 -(void)requestTimeline:(NSInteger)index;
-
-+ (void)update;
-+ (void)loadOldTweets;
-- (void)requestCreateFavorite:(NSString *)serialId;
+-(void)requestCreateFavorite:(NSString *)serialId;
 
 @end

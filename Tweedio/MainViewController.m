@@ -22,15 +22,17 @@
 //ページインデックス
 @property (nonatomic) NSInteger pageIndex;
 
-typedef enum TweetPlayPart:NSInteger {
-    TWEET_PLAY_PART_USER,
-    TWEET_PLAY_PART_BODY,
-    TWEET_PLAY_EMPTY,
-    TWEET_PLAY_EMPTY_NEXT_USER
+typedef enum NextAction:NSInteger {
+    NEXT_ACTION_USER_NAME,
+    NEXT_ACTION_BODY,
+    NEXT_ACTION_STOP,
+    NEXT_ACTION_NEXT,
+    NEXT_ACTION_BACK,
+    NEXT_ACTION_UPDATE
 } TweetPlayPart;
 
-//現在のツイート読み上げ箇所
-@property (nonatomic) TweetPlayPart currentTweetplayPart;
+//次のアクション
+@property (nonatomic) enum NextAction nextAction;
 
 
 
@@ -74,19 +76,29 @@ typedef enum TweetPlayPart:NSInteger {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    //test
-    self.synthesizer = [[AVSpeechSynthesizer alloc] init];
-    self.settingData = [[SettingData alloc] init];
+    [self showLoading];
     [TwitterManager sharedManager].delegate = self;
-    self.synthesizer.delegate = self;
-    //test
+    [[TwitterManager sharedManager] isAuthenticated];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+#pragma mark - initialSetting
+
+- (void)initialSetting {
     
     [self reset];
     
-    [[TwitterManager sharedManager] isAuthenticated];
-    [self showLoading];
-    [[TwitterManager sharedManager] requestTimeline:0];
+    //synthesizerの設定
+    self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+    self.synthesizer.delegate = self;
     
+    //設定準備
     SettingData *data = [SettingDataManager getData];
     self.settingData = data;
     if (data.rate == AVSpeechUtteranceMaximumSpeechRate) {
@@ -99,34 +111,49 @@ typedef enum TweetPlayPart:NSInteger {
     
     self.sl.value = data.pitchMultiplier;
     
-    return;
+    //タイムラインの情報取得
+    [[TwitterManager sharedManager] requestTimeline:0];
+}
+
+- (void)doNextAction {
     
-    BOOL isAuthenticated = [[TwitterManager sharedManager] isAuthenticated];
-    if (isAuthenticated == NO) {
-        //アラート画面表示
+    if (self.nextAction == NEXT_ACTION_USER_NAME) {
+        NSLog(@"a");
+        [self next];
+    
+    } else if (self.nextAction == NEXT_ACTION_BODY) {
+        NSLog(@"b");
+        [NSThread sleepForTimeInterval:0.5f];
+        [self play];
+    
+    } else if (self.nextAction == NEXT_ACTION_STOP) {
+        NSLog(@"c");
+        //何もしない
+    
+    } else if (self.nextAction == NEXT_ACTION_NEXT) {
+        NSLog(@"d");
+        self.nextAction = NEXT_ACTION_USER_NAME;
+        [self play];
+        
+    } else if (self.nextAction == NEXT_ACTION_BACK) {
+        NSLog(@"e");
+        self.nextAction = NEXT_ACTION_USER_NAME;
+        [self play];
+        
+    } else if (self.nextAction == NEXT_ACTION_UPDATE) {
+        NSLog(@"f");
+        //
+        
     } else {
-        
-        [self reset];
-        
-        SettingData *data = [SettingDataManager getData];
-        if(data == nil){
-            self.settingData = [[SettingData alloc] init];
-        }
-        
-//        [[TwitterManager sharedManager] requestTimeline:0];
+        NSLog(@"g");
     }
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 #pragma mark - IBAction
 
 - (IBAction)respondToBtnUpdate:(id)sender {
+    
+    self.nextAction = NEXT_ACTION_UPDATE;
     
     //もし音が鳴っていたら止める
     [self stop];
@@ -134,9 +161,6 @@ typedef enum TweetPlayPart:NSInteger {
     //各種データ初期化
     [self reset];
     
-    //test
-    
-//    [[TwitterManager sharedManager] isAuthenticated];
     [self showLoading];
     [[TwitterManager sharedManager] requestTimeline:0];
 }
@@ -146,27 +170,7 @@ typedef enum TweetPlayPart:NSInteger {
 }
 
 - (IBAction)respondToBtnNext:(id)sender {
-    if([self.tweedDataList count] == 0){
-        return;
-    }
-    
-    if(self.currentIndex == [self.tweedDataList count] - 1){
-        return;
-    }
-    
-    self.currentIndex++;
-    self.currentTweetplayPart = TWEET_PLAY_EMPTY_NEXT_USER;
-    
-    //なんかとまらなかったので強引な方法？？記事も見つからず・・・
-    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:nil];
-    [utterance setRate              :self.settingData.rate];
-    [utterance setPitchMultiplier   :self.settingData.pitchMultiplier];
-    AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
-    [utterance setVoice:voice];
-    [self.synthesizer speakUtterance:utterance];
-    //
-    
-    [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+    [self next];
 }
 
 - (IBAction)respondToBtnFavorite:(id)sender {
@@ -174,10 +178,17 @@ typedef enum TweetPlayPart:NSInteger {
 }
 
 - (IBAction)respondToBtnStop:(id)sender {
+    self.nextAction = NEXT_ACTION_STOP;
     [self stop];
 }
 
 - (IBAction)respondToBtnPlay:(id)sender {
+    
+    if (self.nextAction != NEXT_ACTION_STOP) {
+        return;
+    }
+    
+    self.nextAction = NEXT_ACTION_USER_NAME;
     [self play];
 }
 
@@ -187,7 +198,7 @@ typedef enum TweetPlayPart:NSInteger {
 - (void)reset {
     self.tweedDataList = [NSMutableArray array];
     self.currentIndex = 0;
-    self.currentTweetplayPart = TWEET_PLAY_PART_USER;
+    self.nextAction = NEXT_ACTION_USER_NAME;
 }
 
 #pragma mark - sound
@@ -231,7 +242,16 @@ typedef enum TweetPlayPart:NSInteger {
     
     TweetData *data = [self.tweedDataList objectAtIndex:self.currentIndex];
     
-    NSString *str = self.currentTweetplayPart == TWEET_PLAY_PART_USER ? data.username : data.body;
+    NSString *str;
+    if(self.nextAction == NEXT_ACTION_USER_NAME){
+        self.nextAction = NEXT_ACTION_BODY;
+        str = data.username;
+    } else if(self.nextAction == NEXT_ACTION_BODY){
+        self.nextAction = NEXT_ACTION_USER_NAME;
+        str = data.body;
+    } else {
+        NSLog(@"ここのログでてたらまずい");
+    }
     NSString *generatedTweet = [TweetUtil replaceForHearing:str];
     
     AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:generatedTweet];
@@ -246,22 +266,33 @@ typedef enum TweetPlayPart:NSInteger {
     [self.synthesizer speakUtterance:utterance];
 }
 
-//停止する
+/**
+ * 停止する
+ */
 - (void)stop {
+    
     if([self.synthesizer isSpeaking]) {
         
-        self.currentTweetplayPart = TWEET_PLAY_EMPTY;
+        NSLog(@"isspeaking");
         
-        //なんかとまらなかったので強引な方法？？記事も見つからず・・・
+        /**--なんかとまらなかったので強引な方法？？記事も見つからず・・・--*/
+        /**--空のものを読み上げされるためイベントが発生するという展開に・・・--*/
         AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:nil];
-        [utterance setRate              :self.settingData.rate];
-        [utterance setPitchMultiplier   :self.settingData.pitchMultiplier];
+//        [utterance setRate              :self.settingData.rate];
+//        [utterance setPitchMultiplier   :self.settingData.pitchMultiplier];
         AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
         [utterance setVoice:voice];
         [self.synthesizer speakUtterance:utterance];
-        //
+        /**-----------------------------------------------------------------*/
         
         [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+        
+        [self doNextAction];
+        
+    } else {
+        NSLog(@"isnotspeaking");
+        [self doNextAction];
+        
     }
 }
 
@@ -276,15 +307,10 @@ typedef enum TweetPlayPart:NSInteger {
         return;
     }
     
-    [self stop];
     self.currentIndex--;
+    self.nextAction = NEXT_ACTION_BACK;
     
-    [NSThread sleepForTimeInterval:0.4f];
-    [self ring];
-    [NSThread sleepForTimeInterval:1.4f];
-    
-    self.currentTweetplayPart = TWEET_PLAY_PART_USER;
-    [self play];
+    [self stop];
 }
 
 //次へ
@@ -299,14 +325,9 @@ typedef enum TweetPlayPart:NSInteger {
     }
     
     self.currentIndex++;
+    self.nextAction = NEXT_ACTION_NEXT;
+    
     [self stop];
-    
-    [NSThread sleepForTimeInterval:0.4f];
-    [self ring];
-    [NSThread sleepForTimeInterval:1.4f];
-    
-    self.currentTweetplayPart = TWEET_PLAY_PART_USER;
-    [self play];
 }
 
 
@@ -352,12 +373,12 @@ typedef enum TweetPlayPart:NSInteger {
 - (void)update {
     [self reset];
     
-    [TwitterManager update];
+//    [TwitterManager update];
 }
 
 //古いツイートをさらに読み込む
 - (void)loadOldTweets {
-    [TwitterManager loadOldTweets];
+//    [TwitterManager loadOldTweets];
 }
 
 //現在のツイートをお気に入りに登録する
@@ -376,35 +397,32 @@ typedef enum TweetPlayPart:NSInteger {
 
 #pragma mark - AVSpeechSynthesizerDelegate
 
-//指定した読み上げが完了したときの処理
+/**
+ * 読み上げ完了した時処理
+ * @param synthesizer
+ * @param utterance
+ */
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance {
-    
     NSLog(@"didFinishSpeechUtterance");
-    
-    if (self.currentTweetplayPart == TWEET_PLAY_PART_USER) {
-        //ユーザ名を読み終わった
-        [NSThread sleepForTimeInterval:0.5f];
-        self.currentTweetplayPart = TWEET_PLAY_PART_BODY;
-        [self play];
-    } else if (self.currentTweetplayPart == TWEET_PLAY_PART_BODY) {
-        [self next];
-    } else if (self.currentTweetplayPart == TWEET_PLAY_EMPTY) {
-        self.currentTweetplayPart = TWEET_PLAY_PART_USER;
-    } else if (self.currentTweetplayPart == TWEET_PLAY_EMPTY_NEXT_USER) {
-        self.currentTweetplayPart = TWEET_PLAY_PART_USER;
-        [NSThread sleepForTimeInterval:0.4f];
-        [self ring];
-        [NSThread sleepForTimeInterval:1.4f];
-        
-        self.currentTweetplayPart = TWEET_PLAY_PART_USER;
-        [self play];
-    }
+    [self doNextAction];
 }
 
 #pragma mark - TwitterManagerDelegate
 
-//
-- (void)twitterManagerDidUpdate:(NSMutableArray *)list {
+- (void)twitterManagerDidAuthenticated:(BOOL)boolean {
+    if (boolean) {
+        NSLog(@"twitterの認証はOK");
+        [self initialSetting];
+    } else {
+//        UIAlertView *
+    }
+}
+
+/**
+ * タイムライン更新時
+ * @param list
+ */
+- (void)twitterManagerDidUpdateTimeline:(NSMutableArray *)list {
     [self hideLoading];
     [self ringComplte];
     [NSThread sleepForTimeInterval:0.8f];
@@ -412,19 +430,21 @@ typedef enum TweetPlayPart:NSInteger {
     [self play];
 }
 
-- (void)twitterManagerDidLoad:(NSMutableArray *)list {
-    [self hideLoading];
-    [self ringComplte];
-    [self.tweedDataList addObjectsFromArray:list];
-    [self next];
-}
-
+/**
+ * お気に入り成功時
+ */
 - (void)twitterManagerDidFavorite {
     [self hideLoading];
     [self ringComplte];
     [NSThread sleepForTimeInterval:0.8f];
-    NSLog(@"favorite success");
     [self next];
+}
+
+/**
+ * ツイッターAPIでエラーが返ってきたとき
+ */
+- (void)twitterManagerDidApiError {
+//    UIAlertView *
 }
 
 @end

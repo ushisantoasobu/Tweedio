@@ -55,20 +55,18 @@
 
 
 
-
+/**
+ * 認証する
+ *
+ */
 -(BOOL)isAuthenticated {
-    //  Step 1:  Obtain access to the user's Twitter accounts
     self.accountStore = [[ACAccountStore alloc] init];
     ACAccountType *twitterAccountType = [self.accountStore
                                          accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     [self.accountStore requestAccessToAccountsWithType:twitterAccountType
                                                options:nil
                                             completion:^(BOOL granted, NSError *error){
-                                                if(granted){
-                                                    NSLog(@"success");
-                                                } else {
-                                                    NSLog(@"error");
-                                                }
+                                                [self.delegate twitterManagerDidAuthenticated:granted];
                                             }];
     return YES;
 }
@@ -126,7 +124,7 @@
                                                                     [arr addObject:data];
                                                                 }
                                                                 
-                                                                [self.delegate twitterManagerDidLoad:arr];
+                                                                [self.delegate twitterManagerDidUpdateTimeline:arr];
                                                                 
                                                             }
                                                             
