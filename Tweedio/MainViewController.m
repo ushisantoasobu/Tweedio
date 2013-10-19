@@ -110,10 +110,12 @@ typedef enum NextAction:NSInteger {
     self.sl.value = data.pitchMultiplier;
     
     //タイムラインの情報取得
-    [[TwitterManager sharedManager] requestTimeline:0];
+    [[TwitterManager sharedManager] requestTimeline];
 }
 
 - (void)doNextAction {
+    
+    NSLog(@"donextaction");
     
     if (self.nextAction == NEXT_ACTION_USER_NAME) {
         NSLog(@"a");
@@ -140,7 +142,9 @@ typedef enum NextAction:NSInteger {
         
     } else if (self.nextAction == NEXT_ACTION_UPDATE) {
         NSLog(@"f");
-        //
+        [self reset];
+        [self showLoading];
+        [[TwitterManager sharedManager] requestTimeline];
         
     } else {
         NSLog(@"g");
@@ -155,12 +159,6 @@ typedef enum NextAction:NSInteger {
     
     //もし音が鳴っていたら止める
     [self stop];
-    
-    //各種データ初期化
-    [self reset];
-    
-    [self showLoading];
-    [[TwitterManager sharedManager] requestTimeline:0];
 }
 
 - (IBAction)respondToBtnBack:(id)sender {
@@ -244,6 +242,8 @@ typedef enum NextAction:NSInteger {
     if(self.nextAction == NEXT_ACTION_USER_NAME){
         self.nextAction = NEXT_ACTION_BODY;
         str = data.username;
+        [self ring];
+        [NSThread sleepForTimeInterval:1.0f];
     } else if(self.nextAction == NEXT_ACTION_BODY){
         self.nextAction = NEXT_ACTION_USER_NAME;
         str = data.body;
@@ -276,8 +276,6 @@ typedef enum NextAction:NSInteger {
         /**--なんかとまらなかったので強引な方法？？記事も見つからず・・・--*/
         /**--空のものを読み上げされるためイベントが発生するという展開に・・・--*/
         AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:nil];
-//        [utterance setRate              :self.settingData.rate];
-//        [utterance setPitchMultiplier   :self.settingData.pitchMultiplier];
         AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
         [utterance setVoice:voice];
         [self.synthesizer speakUtterance:utterance];
@@ -285,7 +283,7 @@ typedef enum NextAction:NSInteger {
         
         [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
         
-        [self doNextAction];
+//        [self doNextAction];
         
     } else {
         NSLog(@"isnotspeaking");

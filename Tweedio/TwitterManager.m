@@ -76,7 +76,7 @@
  * タイムラインを取得する
  * @param index
  */
--(void)requestTimeline:(NSInteger)index {
+-(void)requestTimeline {
     
     ACAccountType *accountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     [self.accountStore requestAccessToAccountsWithType:accountType

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0C7B8E6E-6FA0-41E9-B416-B7F01534ABE4</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Tweedio</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>BE7D2DC3-BAF2-4221-BA2C-A3A272E7D861</key>
+		<string>https://github.com/ushisantoasobu/Tweedio.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Tweedio.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>BE7D2DC3-BAF2-4221-BA2C-A3A272E7D861</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ushisantoasobu/Tweedio.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>BE7D2DC3-BAF2-4221-BA2C-A3A272E7D861</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>BE7D2DC3-BAF2-4221-BA2C-A3A272E7D861</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Tweedio</string>
+		</dict>
+	</array>
+</dict>
+</plist>
