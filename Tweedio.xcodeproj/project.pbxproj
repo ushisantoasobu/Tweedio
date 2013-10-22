@@ -28,15 +28,12 @@
 		D68EE28D17FF2593007AEED2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE28C17FF2593007AEED2 /* Social.framework */; };
 		D68EE28E17FF29EB007AEED2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE28A17FF2298007AEED2 /* Accounts.framework */; };
 		D6A3097D1802C3A5003CCD09 /* TweetData.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A3097C1802C3A5003CCD09 /* TweetData.m */; };
-		D6A4148E18095946005EA37A /* voice_of_light.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6A4148D18095946005EA37A /* voice_of_light.mp3 */; };
 		D6A4C2BE1802B09F00590813 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A4C2BD1802B09F00590813 /* AudioToolbox.framework */; };
-		D6A4C2C11802B34500590813 /* bell01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6A4C2C01802B34500590813 /* bell01.mp3 */; };
 		D6AC523D18028E2500016648 /* TweetUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC523C18028E2500016648 /* TweetUtil.m */; };
 		D6AC52431802925500016648 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC52411802925500016648 /* MainViewController.m */; };
 		D6AC52441802925500016648 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6AC52421802925500016648 /* MainViewController.xib */; };
 		D6AC524C18029BFC00016648 /* SettingData.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC524B18029BFC00016648 /* SettingData.m */; };
 		D6AC524F1802A09000016648 /* SettingDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D6AC524E1802A09000016648 /* SettingDataManager.m */; };
-		D6AEA95E18084D17004ADB9B /* Warp1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D6AEA95D18084D17004ADB9B /* Warp1.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,9 +73,7 @@
 		D68EE28C17FF2593007AEED2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D6A3097B1802C3A5003CCD09 /* TweetData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetData.h; sourceTree = "<group>"; };
 		D6A3097C1802C3A5003CCD09 /* TweetData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetData.m; sourceTree = "<group>"; };
-		D6A4148D18095946005EA37A /* voice_of_light.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = voice_of_light.mp3; sourceTree = "<group>"; };
 		D6A4C2BD1802B09F00590813 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		D6A4C2C01802B34500590813 /* bell01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell01.mp3; sourceTree = "<group>"; };
 		D6AC523B18028E2500016648 /* TweetUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetUtil.h; sourceTree = "<group>"; };
 		D6AC523C18028E2500016648 /* TweetUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetUtil.m; sourceTree = "<group>"; };
 		D6AC52401802925500016648 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -88,7 +83,6 @@
 		D6AC524B18029BFC00016648 /* SettingData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingData.m; sourceTree = "<group>"; };
 		D6AC524D1802A09000016648 /* SettingDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingDataManager.h; sourceTree = "<group>"; };
 		D6AC524E1802A09000016648 /* SettingDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingDataManager.m; sourceTree = "<group>"; };
-		D6AEA95D18084D17004ADB9B /* Warp1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Warp1.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,9 +208,6 @@
 			children = (
 				D6615EC4180B0D3800F83331 /* voice_of_light.caf */,
 				D6615EC1180AF57400F83331 /* Warp1.caf */,
-				D6A4148D18095946005EA37A /* voice_of_light.mp3 */,
-				D6A4C2C01802B34500590813 /* bell01.mp3 */,
-				D6AEA95D18084D17004ADB9B /* Warp1.mp3 */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -303,14 +294,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6AEA95E18084D17004ADB9B /* Warp1.mp3 in Resources */,
 				D68EE25F17FF21E6007AEED2 /* InfoPlist.strings in Resources */,
-				D6A4148E18095946005EA37A /* voice_of_light.mp3 in Resources */,
 				D6AC52441802925500016648 /* MainViewController.xib in Resources */,
 				D6615EC2180AF57400F83331 /* Warp1.caf in Resources */,
 				D68EE26A17FF21E6007AEED2 /* Images.xcassets in Resources */,
 				D6615EC5180B0D3800F83331 /* voice_of_light.caf in Resources */,
-				D6A4C2C11802B34500590813 /* bell01.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

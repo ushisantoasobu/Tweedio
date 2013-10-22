@@ -59,16 +59,15 @@
  * 認証する
  *
  */
--(BOOL)isAuthenticated {
+-(void)isAuthenticated {
     self.accountStore = [[ACAccountStore alloc] init];
     ACAccountType *twitterAccountType = [self.accountStore
                                          accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     [self.accountStore requestAccessToAccountsWithType:twitterAccountType
                                                options:nil
                                             completion:^(BOOL granted, NSError *error){
-                                                [self.delegate twitterManagerDidAuthenticated:granted];
+                                                [self.delegate twitterManagerDidAuthenticated:granted account:self.accountStore.accounts];
                                             }];
-    return YES;
 }
 
 

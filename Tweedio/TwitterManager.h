@@ -12,7 +12,7 @@
 @protocol TwitterManagerDelegate <NSObject>
 
 @optional
-- (void)twitterManagerDidAuthenticated:(BOOL)boolean;
+- (void)twitterManagerDidAuthenticated:(BOOL)boolean account:(NSArray *)accounts;
 - (void)twitterManagerDidUpdateTimeline:(NSMutableArray *)list;
 - (void)twitterManagerDidFavorite;
 - (void)twitterManagerDidApiError;
@@ -24,7 +24,7 @@
 
 +(TwitterManager*)sharedManager;
 
--(BOOL)isAuthenticated;
+-(void)isAuthenticated;
 -(void)requestTimeline;
 -(void)requestCreateFavorite:(NSString *)serialId;
 

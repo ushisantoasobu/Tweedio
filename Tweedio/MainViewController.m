@@ -8,7 +8,7 @@
 
 #import "MainViewController.h"
 #import "TweetUtil.h"
-#import <AudioToolbox/AudioToolbox.h>
+#import <AudioToolbox/AudioServices.h>
 
 @interface MainViewController ()
 
@@ -35,6 +35,8 @@ typedef enum NextAction:NSInteger {
 @property (nonatomic) enum NextAction nextAction;
 
 
+//次のアクション
+@property (nonatomic, strong) NSArray *accounts;
 
 //設定データモデル
 @property (nonatomic, strong) SettingData *settingData;
@@ -109,9 +111,23 @@ typedef enum NextAction:NSInteger {
     
     self.sl.value = data.pitchMultiplier;
     
+    [self setHeader];
+    
     //タイムラインの情報取得
     [[TwitterManager sharedManager] requestTimeline];
 }
+
+/**
+ * ヘッダの設定
+ */
+- (void)setHeader {
+    if ([self.accounts count] > 1) {
+        NSLog(@"アカウント複数");
+    }
+}
+
+
+#pragma mark -
 
 - (void)doNextAction {
     
@@ -128,6 +144,7 @@ typedef enum NextAction:NSInteger {
     
     } else if (self.nextAction == NEXT_ACTION_STOP) {
         NSLog(@"c");
+        [self ringStop];
         //何もしない
     
     } else if (self.nextAction == NEXT_ACTION_NEXT) {
@@ -200,31 +217,16 @@ typedef enum NextAction:NSInteger {
 #pragma mark - sound
 
 - (void)ring {
-    
-    SystemSoundID sound;
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"Warp1" ofType:@"caf"];
-    NSURL *url = [NSURL fileURLWithPath:path];
-    
-    //以下なにやってるの？？　＞＜
-    AudioServicesCreateSystemSoundID((CFURLRef)CFBridgingRetain(url), &sound);
-    
-    // サウンドの再生
-    AudioServicesPlaySystemSound(sound);
+    AudioServicesPlaySystemSound(1109);
+//    AudioServicesPlaySystemSound(1308);
 }
 
 - (void)ringComplte {
-    
-    SystemSoundID sound;
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"voice_of_light" ofType:@"caf"];
-    NSURL *url = [NSURL fileURLWithPath:path];
-    
-    //以下なにやってるの？？　＞＜
-    AudioServicesCreateSystemSoundID((CFURLRef)CFBridgingRetain(url), &sound);
-    
-    // サウンドの再生
-    AudioServicesPlaySystemSound(sound);
+    AudioServicesPlaySystemSound(1154);
+}
+
+- (void)ringStop {
+    AudioServicesPlaySystemSound(1305);
 }
 
 #pragma mark - operation
@@ -257,6 +259,7 @@ typedef enum NextAction:NSInteger {
     //各種設定
     [utterance setRate              :self.settingData.rate];
     [utterance setPitchMultiplier   :self.settingData.pitchMultiplier];
+    [utterance setVolume:0.30];
     
     AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
     [utterance setVoice:voice];
@@ -348,20 +351,6 @@ typedef enum NextAction:NSInteger {
     [SettingDataManager setPitch:self.settingData.pitchMultiplier];
 }
 
-#pragma mark - loading
-
-- (void)showLoading {
-    self.ai.hidden = NO;
-    [self.ai startAnimating];
-}
-
-- (void)hideLoading {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.ai stopAnimating];
-        self.ai.hidden = YES;
-    });
-}
-
 #pragma mark - twitterAPI
 
 //新しいツイートを読み込む
@@ -405,12 +394,12 @@ typedef enum NextAction:NSInteger {
 
 #pragma mark - TwitterManagerDelegate
 
-- (void)twitterManagerDidAuthenticated:(BOOL)boolean {
+- (void)twitterManagerDidAuthenticated:(BOOL)boolean account:(NSArray *)accounts{
     if (boolean) {
-        NSLog(@"twitterの認証はOK");
+        self.accounts = accounts;
         [self initialSetting];
     } else {
-//        UIAlertView *
+        [self twitterAutheticatedError];
     }
 }
 
@@ -436,11 +425,48 @@ typedef enum NextAction:NSInteger {
     [self next];
 }
 
+
+#pragma mark - loading
+
+- (void)showLoading {
+    self.ai.hidden = NO;
+    [self.ai startAnimating];
+}
+
+- (void)hideLoading {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.ai stopAnimating];
+        self.ai.hidden = YES;
+    });
+}
+
+
+#pragma mark - account select
+
+
+
+#pragma mark - error
+
+/**
+ * ツイッターAPIでエラーが返ってきたとき
+ */
+- (void)twitterAutheticatedError {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"alert"
+                                                    message:@"XXXXXXXX"
+                                                   delegate:nil
+                                          cancelButtonTitle:nil
+                                          otherButtonTitles:@"OK", nil];
+}
+
 /**
  * ツイッターAPIでエラーが返ってきたとき
  */
 - (void)twitterManagerDidApiError {
-//    UIAlertView *
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"alert"
+                                                    message:@"エラーが発生しました"
+                                                   delegate:nil
+                                          cancelButtonTitle:nil
+                                          otherButtonTitles:@"OK", nil];
 }
 
 @end
