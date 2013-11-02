@@ -55,6 +55,7 @@ typedef enum NextAction:NSInteger {
 
 @property (weak, nonatomic) IBOutlet UISlider *sl;
 
+@property (weak, nonatomic) IBOutlet UIView *grayView;
 
 
 
@@ -139,7 +140,7 @@ typedef enum NextAction:NSInteger {
     
     } else if (self.nextAction == NEXT_ACTION_BODY) {
         NSLog(@"b");
-        [NSThread sleepForTimeInterval:0.5f];
+//        [NSThread sleepForTimeInterval:0.5f];
         [self play];
     
     } else if (self.nextAction == NEXT_ACTION_STOP) {
@@ -187,6 +188,7 @@ typedef enum NextAction:NSInteger {
 }
 
 - (IBAction)respondToBtnFavorite:(id)sender {
+    self.nextAction = NEXT_ACTION_STOP;
     [self favorite];
 }
 
@@ -217,16 +219,46 @@ typedef enum NextAction:NSInteger {
 #pragma mark - sound
 
 - (void)ring {
-    AudioServicesPlaySystemSound(1109);
-//    AudioServicesPlaySystemSound(1308);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+            AudioServicesPlaySystemSound(1109);
+            //    AudioServicesPlaySystemSound(1308);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            
+            
+        });
+        
+    });
 }
 
 - (void)ringComplte {
-    AudioServicesPlaySystemSound(1154);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        AudioServicesPlaySystemSound(1154);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            
+            
+        });
+        
+    });
 }
 
 - (void)ringStop {
-    AudioServicesPlaySystemSound(1305);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        AudioServicesPlaySystemSound(1257);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            
+            
+        });
+        
+    });
 }
 
 #pragma mark - operation
@@ -234,37 +266,48 @@ typedef enum NextAction:NSInteger {
 //再生する
 - (void)play {
     
-    if (self.tweedDataList == nil || [self.tweedDataList count] == 0) {
-        return;
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        if (self.tweedDataList == nil || [self.tweedDataList count] == 0) {
+            return;
+        }
+        
+        TweetData *data = [self.tweedDataList objectAtIndex:self.currentIndex];
+        
+        NSString *str;
+        if(self.nextAction == NEXT_ACTION_USER_NAME){
+            self.nextAction = NEXT_ACTION_BODY;
+            str = data.username;
+            [self ring];
+//            [NSThread sleepForTimeInterval:1.0f];
+        } else if(self.nextAction == NEXT_ACTION_BODY){
+            self.nextAction = NEXT_ACTION_USER_NAME;
+            str = data.body;
+        } else {
+            NSLog(@"ここのログでてたらまずい");
+        }
+        NSString *generatedTweet = [TweetUtil replaceForHearing:str];
+        
+        AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:generatedTweet];
+        
+        //各種設定
+        [utterance setRate              :self.settingData.rate];
+        [utterance setPitchMultiplier   :self.settingData.pitchMultiplier];
+        [utterance setVolume:0.80];
+        
+        AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
+        [utterance setVoice:voice];
+        
+        [self.synthesizer speakUtterance:utterance];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            //
+            
+        });
+        
+    });
     
-    TweetData *data = [self.tweedDataList objectAtIndex:self.currentIndex];
-    
-    NSString *str;
-    if(self.nextAction == NEXT_ACTION_USER_NAME){
-        self.nextAction = NEXT_ACTION_BODY;
-        str = data.username;
-        [self ring];
-        [NSThread sleepForTimeInterval:1.0f];
-    } else if(self.nextAction == NEXT_ACTION_BODY){
-        self.nextAction = NEXT_ACTION_USER_NAME;
-        str = data.body;
-    } else {
-        NSLog(@"ここのログでてたらまずい");
-    }
-    NSString *generatedTweet = [TweetUtil replaceForHearing:str];
-    
-    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:generatedTweet];
-
-    //各種設定
-    [utterance setRate              :self.settingData.rate];
-    [utterance setPitchMultiplier   :self.settingData.pitchMultiplier];
-    [utterance setVolume:0.30];
-    
-    AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
-    [utterance setVoice:voice];
-    
-    [self.synthesizer speakUtterance:utterance];
 }
 
 /**
@@ -276,17 +319,29 @@ typedef enum NextAction:NSInteger {
         
         NSLog(@"isspeaking");
         
-        /**--なんかとまらなかったので強引な方法？？記事も見つからず・・・--*/
-        /**--空のものを読み上げされるためイベントが発生するという展開に・・・--*/
-        AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:nil];
-        AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
-        [utterance setVoice:voice];
-        [self.synthesizer speakUtterance:utterance];
-        /**-----------------------------------------------------------------*/
         
-        [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-//        [self doNextAction];
+            /**--なんかとまらなかったので強引な方法？？記事も見つからず・・・--*/
+            /**--空のものを読み上げされるためイベントが発生するという展開に・・・--*/
+            NSString *str = @"testtesttest";
+            AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:str];
+            AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
+            [utterance setVoice:voice];
+            [self.synthesizer speakUtterance:utterance];
+            /**-----------------------------------------------------------------*/
+            
+            [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                //
+                
+            });
+            
+        });
+        
+
         
     } else {
         NSLog(@"isnotspeaking");
@@ -410,7 +465,7 @@ typedef enum NextAction:NSInteger {
 - (void)twitterManagerDidUpdateTimeline:(NSMutableArray *)list {
     [self hideLoading];
     [self ringComplte];
-    [NSThread sleepForTimeInterval:0.8f];
+//    [NSThread sleepForTimeInterval:0.8f];
     self.tweedDataList = list;
     [self play];
 }
@@ -421,7 +476,7 @@ typedef enum NextAction:NSInteger {
 - (void)twitterManagerDidFavorite {
     [self hideLoading];
     [self ringComplte];
-    [NSThread sleepForTimeInterval:0.8f];
+//    [NSThread sleepForTimeInterval:0.8f];
     [self next];
 }
 
@@ -429,12 +484,16 @@ typedef enum NextAction:NSInteger {
 #pragma mark - loading
 
 - (void)showLoading {
-    self.ai.hidden = NO;
-    [self.ai startAnimating];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.grayView.hidden = NO;
+        self.ai.hidden = NO;
+        [self.ai startAnimating];
+    });
 }
 
 - (void)hideLoading {
     dispatch_async(dispatch_get_main_queue(), ^{
+        self.grayView.hidden = YES;
         [self.ai stopAnimating];
         self.ai.hidden = YES;
     });

@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
                 <outlet property="ai" destination="Sra-pM-4wr" id="Xi2-1c-TPk"/>
+                <outlet property="grayView" destination="kWK-jq-lL2" id="6tP-M5-LDK"/>
                 <outlet property="psc" destination="ajI-Jf-mce" id="hPD-4l-dK3"/>
                 <outlet property="sl" destination="gpM-zY-k45" id="z9X-fg-Vqj"/>
                 <outlet property="view" destination="1" id="3"/>
@@ -106,8 +107,13 @@
                         <action selector="respondToBtnPlay:" destination="-1" eventType="touchUpInside" id="hH9-Yr-STL"/>
                     </connections>
                 </button>
-                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Sra-pM-4wr">
-                    <rect key="frame" x="150" y="270" width="20" height="20"/>
+                <view alpha="0.40000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kWK-jq-lL2">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Sra-pM-4wr">
+                    <rect key="frame" x="150" y="270" width="37" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </activityIndicatorView>
                 <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hqi-YL-ceM">
