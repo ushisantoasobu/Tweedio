@@ -319,27 +319,28 @@ typedef enum NextAction:NSInteger {
         
         NSLog(@"isspeaking");
         
+        [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-            /**--なんかとまらなかったので強引な方法？？記事も見つからず・・・--*/
-            /**--空のものを読み上げされるためイベントが発生するという展開に・・・--*/
-            NSString *str = @"testtesttest";
-            AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:str];
-            AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
-            [utterance setVoice:voice];
-            [self.synthesizer speakUtterance:utterance];
-            /**-----------------------------------------------------------------*/
-            
-            [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                //
-                
-            });
-            
-        });
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//        
+//            /**--なんかとまらなかったので強引な方法？？記事も見つからず・・・--*/
+//            /**--空のものを読み上げされるためイベントが発生するという展開に・・・--*/
+//            NSString *str = @"testtesttest";
+//            AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:str];
+//            AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
+//            [utterance setVoice:voice];
+//            [self.synthesizer speakUtterance:utterance];
+//            /**-----------------------------------------------------------------*/
+//            
+//            [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+//            
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                
+//                //
+//                
+//            });
+//            
+//        });
         
 
         
@@ -515,6 +516,7 @@ typedef enum NextAction:NSInteger {
                                                    delegate:nil
                                           cancelButtonTitle:nil
                                           otherButtonTitles:@"OK", nil];
+    [alert show];
 }
 
 /**
@@ -526,6 +528,7 @@ typedef enum NextAction:NSInteger {
                                                    delegate:nil
                                           cancelButtonTitle:nil
                                           otherButtonTitles:@"OK", nil];
+    [alert show];
 }
 
 @end

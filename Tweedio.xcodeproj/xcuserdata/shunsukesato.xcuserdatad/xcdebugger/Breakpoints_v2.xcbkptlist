@@ -42,13 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tweedio/MainViewController.m"
-            timestampString = "404453205.016587"
+            timestampString = "405410554.816288"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "450"
-            endingLineNumber = "450"
-            landmarkName = "-speechSynthesizer:didFinishSpeechUtterance:"
-            landmarkType = "5">
+            startingLineNumber = "451"
+            endingLineNumber = "451"
+            landmarkName = "@implementation MainViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -63,7 +63,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "198"
             endingLineNumber = "198"
-            landmarkName = "-respondToBtnFavorite:"
+            landmarkName = "-respondToBtnStop:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -79,8 +79,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "185"
             endingLineNumber = "185"
-            landmarkName = "-respondToBtnUpdate:"
-            landmarkType = "5">
+            landmarkName = "@implementation MainViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -95,8 +95,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "312"
             endingLineNumber = "312"
-            landmarkName = "-play"
-            landmarkType = "5">
+            landmarkName = "@implementation MainViewController"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -173,8 +173,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "190"
             endingLineNumber = "190"
-            landmarkName = "@implementation MainViewController"
-            landmarkType = "3">
+            landmarkName = "-respondToBtnFavorite:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -184,11 +184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tweedio/MainViewController.m"
-            timestampString = "404453205.016587"
+            timestampString = "405410554.816288"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "376"
-            endingLineNumber = "376"
+            startingLineNumber = "377"
+            endingLineNumber = "377"
             landmarkName = "-next"
             landmarkType = "5">
          </BreakpointContent>
@@ -216,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tweedio/MainViewController.m"
-            timestampString = "404453205.016587"
+            timestampString = "405410554.816288"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "538"
-            endingLineNumber = "538">
+            startingLineNumber = "539"
+            endingLineNumber = "539">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -230,11 +230,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tweedio/MainViewController.m"
-            timestampString = "404453205.016587"
+            timestampString = "405410554.816288"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "543"
-            endingLineNumber = "543">
+            startingLineNumber = "544"
+            endingLineNumber = "544">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -244,13 +244,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tweedio/MainViewController.m"
-            timestampString = "404453205.016587"
+            timestampString = "405410554.816288"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "455"
-            endingLineNumber = "455"
-            landmarkName = "@implementation MainViewController"
-            landmarkType = "3">
+            startingLineNumber = "456"
+            endingLineNumber = "456"
+            landmarkName = "-twitterManagerDidAuthenticated:account:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
