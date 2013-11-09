@@ -22,17 +22,16 @@
 //ページインデックス
 @property (nonatomic) NSInteger pageIndex;
 
-typedef enum NextAction:NSInteger {
-    NEXT_ACTION_USER_NAME,
-    NEXT_ACTION_BODY,
-    NEXT_ACTION_STOP,
-    NEXT_ACTION_NEXT,
-    NEXT_ACTION_BACK,
-    NEXT_ACTION_UPDATE
-} TweetPlayPart;
+typedef enum CurrentPlayPart:NSInteger {
+    CURRENT_PLAY_PART_USER_NAME,
+    CURRENT_PLAY_PART_BODY,
+    CURRENT_PLAY_PART_STOP,
+    CURRENT_PLAY_PART_NEXT,
+    CURRENT_PLAY_PART_BACK,
+} CurrentPlayPart;
 
 //次のアクション
-@property (nonatomic) enum NextAction nextAction;
+@property (nonatomic) enum CurrentPlayPart currentPlayPart;
 
 
 //次のアクション
@@ -128,55 +127,11 @@ typedef enum NextAction:NSInteger {
 }
 
 
-#pragma mark -
-
-- (void)doNextAction {
-    
-    NSLog(@"donextaction");
-    
-    if (self.nextAction == NEXT_ACTION_USER_NAME) {
-        NSLog(@"a");
-        [self next];
-    
-    } else if (self.nextAction == NEXT_ACTION_BODY) {
-        NSLog(@"b");
-//        [NSThread sleepForTimeInterval:0.5f];
-        [self play];
-    
-    } else if (self.nextAction == NEXT_ACTION_STOP) {
-        NSLog(@"c");
-        [self ringStop];
-        //何もしない
-    
-    } else if (self.nextAction == NEXT_ACTION_NEXT) {
-        NSLog(@"d");
-        self.nextAction = NEXT_ACTION_USER_NAME;
-        [self play];
-        
-    } else if (self.nextAction == NEXT_ACTION_BACK) {
-        NSLog(@"e");
-        self.nextAction = NEXT_ACTION_USER_NAME;
-        [self play];
-        
-    } else if (self.nextAction == NEXT_ACTION_UPDATE) {
-        NSLog(@"f");
-        [self reset];
-        [self showLoading];
-        [[TwitterManager sharedManager] requestTimeline];
-        
-    } else {
-        NSLog(@"g");
-    }
-}
-
 #pragma mark - IBAction
 
 - (IBAction)respondToBtnUpdate:(id)sender {
-    
-    self.nextAction = NEXT_ACTION_UPDATE;
-    
-    //もし音が鳴っていたら止める
-    [self stop];
+    [self stopWithNextAction:CURRENT_PLAY_PART_STOP];
+    [self update];
 }
 
 - (IBAction)respondToBtnBack:(id)sender {
@@ -188,22 +143,15 @@ typedef enum NextAction:NSInteger {
 }
 
 - (IBAction)respondToBtnFavorite:(id)sender {
-    self.nextAction = NEXT_ACTION_STOP;
     [self favorite];
 }
 
 - (IBAction)respondToBtnStop:(id)sender {
-    self.nextAction = NEXT_ACTION_STOP;
-    [self stop];
+    [self stopWithRing];
 }
 
 - (IBAction)respondToBtnPlay:(id)sender {
     
-    if (self.nextAction != NEXT_ACTION_STOP) {
-        return;
-    }
-    
-    self.nextAction = NEXT_ACTION_USER_NAME;
     [self play];
 }
 
@@ -213,52 +161,32 @@ typedef enum NextAction:NSInteger {
 - (void)reset {
     self.tweedDataList = [NSMutableArray array];
     self.currentIndex = 0;
-    self.nextAction = NEXT_ACTION_USER_NAME;
+    self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
 }
 
 #pragma mark - sound
 
-- (void)ring {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+- (void)ringDeviceSound:(NSInteger)soundId {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-            AudioServicesPlaySystemSound(1109);
-            //    AudioServicesPlaySystemSound(1308);
+        AudioServicesPlaySystemSound(soundId);
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            
-            
+            //
         });
-        
     });
+}
+
+- (void)ring {
+    [self ringDeviceSound:1109];
 }
 
 - (void)ringComplte {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        AudioServicesPlaySystemSound(1154);
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            
-            
-        });
-        
-    });
+    [self ringDeviceSound:1154];
 }
 
 - (void)ringStop {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        AudioServicesPlaySystemSound(1257);
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            
-            
-        });
-        
-    });
+    [self ringDeviceSound:1257];
 }
 
 #pragma mark - operation
@@ -266,22 +194,24 @@ typedef enum NextAction:NSInteger {
 //再生する
 - (void)play {
     
+    if (self.tweedDataList == nil || [self.tweedDataList count] == 0) {
+        return;
+    }
+    
+    if([self.synthesizer isSpeaking]) {
+        return;
+    }
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        if (self.tweedDataList == nil || [self.tweedDataList count] == 0) {
-            return;
-        }
         
         TweetData *data = [self.tweedDataList objectAtIndex:self.currentIndex];
         
         NSString *str;
-        if(self.nextAction == NEXT_ACTION_USER_NAME){
-            self.nextAction = NEXT_ACTION_BODY;
+        if(self.currentPlayPart == CURRENT_PLAY_PART_USER_NAME){
             str = data.username;
             [self ring];
 //            [NSThread sleepForTimeInterval:1.0f];
-        } else if(self.nextAction == NEXT_ACTION_BODY){
-            self.nextAction = NEXT_ACTION_USER_NAME;
+        } else if(self.currentPlayPart == CURRENT_PLAY_PART_BODY){
             str = data.body;
         } else {
             NSLog(@"ここのログでてたらまずい");
@@ -293,7 +223,7 @@ typedef enum NextAction:NSInteger {
         //各種設定
         [utterance setRate              :self.settingData.rate];
         [utterance setPitchMultiplier   :self.settingData.pitchMultiplier];
-        [utterance setVolume:0.80];
+//        [utterance setVolume:0.80];
         
         AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
         [utterance setVoice:voice];
@@ -313,42 +243,19 @@ typedef enum NextAction:NSInteger {
 /**
  * 停止する
  */
-- (void)stop {
-    
+- (void)stopWithNextAction:(CurrentPlayPart)nextAction {
     if([self.synthesizer isSpeaking]) {
-        
-        NSLog(@"isspeaking");
-        
+        self.currentPlayPart = nextAction;
         [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
-        
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        
-//            /**--なんかとまらなかったので強引な方法？？記事も見つからず・・・--*/
-//            /**--空のものを読み上げされるためイベントが発生するという展開に・・・--*/
-//            NSString *str = @"testtesttest";
-//            AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:str];
-//            AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
-//            [utterance setVoice:voice];
-//            [self.synthesizer speakUtterance:utterance];
-//            /**-----------------------------------------------------------------*/
-//            
-//            [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                
-//                //
-//                
-//            });
-//            
-//        });
-        
-
-        
-    } else {
-        NSLog(@"isnotspeaking");
-        [self doNextAction];
-        
     }
+}
+
+/**
+ * 停止する
+ */
+- (void)stopWithRing {
+    [self ringStop];
+    [self stopWithNextAction:CURRENT_PLAY_PART_STOP];
 }
 
 //前へ
@@ -361,15 +268,22 @@ typedef enum NextAction:NSInteger {
     if(self.currentIndex == 0){
         return;
     }
+//    
+//    [self stop];
     
+    self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
     self.currentIndex--;
-    self.nextAction = NEXT_ACTION_BACK;
     
-    [self stop];
+    [self play];
 }
 
 //次へ
 - (void)next {
+    
+    if([self.synthesizer isSpeaking] == NO){
+        [self play];
+        return;
+    }
     
     if([self.tweedDataList count] == 0){
         return;
@@ -380,9 +294,8 @@ typedef enum NextAction:NSInteger {
     }
     
     self.currentIndex++;
-    self.nextAction = NEXT_ACTION_NEXT;
     
-    [self stop];
+    [self stopWithNextAction:CURRENT_PLAY_PART_NEXT];
 }
 
 
@@ -412,14 +325,10 @@ typedef enum NextAction:NSInteger {
 //新しいツイートを読み込む
 //ツイートの情報を更新する
 - (void)update {
+    [self stopWithNextAction:CURRENT_PLAY_PART_STOP];
     [self reset];
     
-//    [TwitterManager update];
-}
-
-//古いツイートをさらに読み込む
-- (void)loadOldTweets {
-//    [TwitterManager loadOldTweets];
+    [[TwitterManager sharedManager] requestTimeline];
 }
 
 //現在のツイートをお気に入りに登録する
@@ -429,7 +338,7 @@ typedef enum NextAction:NSInteger {
         return;
     }
     
-    [self stop];
+    [self stopWithNextAction:CURRENT_PLAY_PART_STOP];
     
     TweetData *data = [self.tweedDataList objectAtIndex:self.currentIndex];
     [self showLoading];
@@ -445,7 +354,21 @@ typedef enum NextAction:NSInteger {
  */
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance {
     NSLog(@"didFinishSpeechUtterance");
-    [self doNextAction];
+    if(self.currentPlayPart == CURRENT_PLAY_PART_USER_NAME){
+        self.currentPlayPart = CURRENT_PLAY_PART_BODY;
+        [self play];
+    } else if(self.currentPlayPart == CURRENT_PLAY_PART_BODY){
+        self.currentIndex++;
+        self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
+        [self play];
+    } else if(self.currentPlayPart == CURRENT_PLAY_PART_STOP){
+        self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
+    } else if(self.currentPlayPart == CURRENT_PLAY_PART_NEXT){
+        self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
+        [self play];
+    } else {
+        NSLog(@"ありえない");
+    }
 }
 
 #pragma mark - TwitterManagerDelegate
