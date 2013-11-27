@@ -12,5 +12,6 @@
 
 @property (nonatomic) CGFloat rate;
 @property (nonatomic) CGFloat pitchMultiplier;
+@property (nonatomic) NSInteger accountIndex;
 
 @end

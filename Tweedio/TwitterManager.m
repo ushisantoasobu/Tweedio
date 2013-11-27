@@ -61,12 +61,13 @@
  */
 -(void)isAuthenticated {
     self.accountStore = [[ACAccountStore alloc] init];
-    ACAccountType *twitterAccountType = [self.accountStore
+    ACAccountType *accountType = [self.accountStore
                                          accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-    [self.accountStore requestAccessToAccountsWithType:twitterAccountType
+    [self.accountStore requestAccessToAccountsWithType:accountType
                                                options:nil
                                             completion:^(BOOL granted, NSError *error){
-                                                [self.delegate twitterManagerDidAuthenticated:granted account:self.accountStore.accounts];
+                                                [self.delegate twitterManagerDidAuthenticated:granted
+                                                                                      account:[self.accountStore accountsWithAccountType:accountType]];
                                             }];
 }
 
@@ -75,7 +76,7 @@
  * タイムラインを取得する
  * @param index
  */
--(void)requestTimeline {
+-(void)requestTimeline:(NSInteger)accountIndex {
     
     ACAccountType *accountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     [self.accountStore requestAccessToAccountsWithType:accountType
@@ -94,7 +95,7 @@
                                                                                                   URL:requestURL
                                                                                            parameters:param];
                                                 
-                                                 [request setAccount:[[self.accountStore accountsWithAccountType:accountType] objectAtIndex:0]];
+                                                 [request setAccount:[[self.accountStore accountsWithAccountType:accountType] objectAtIndex:accountIndex]];
                                                 
                                                     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
                                                        
@@ -107,9 +108,6 @@
                                                                 [NSJSONSerialization
                                                                  JSONObjectWithData:responseData
                                                                  options:NSJSONReadingAllowFragments error:&jsonError];
-                                                                
-//                                                                timelineData
-                                                                NSDictionary *aaa = [timelineData objectAtIndex:0];
                                                                 
                                                                 NSMutableArray *arr = [[NSMutableArray alloc] init];
                                                                 for (int i = 0; i < [timelineData count]; i++) {
@@ -125,6 +123,8 @@
                                                                 
                                                                 [self.delegate twitterManagerDidUpdateTimeline:arr];
                                                                 
+                                                            } else {
+                                                                [self.delegate twitterManagerDidApiError];
                                                             }
                                                             
                                                         }
@@ -133,7 +133,7 @@
                                                     
                                                 } else {
                                                  
-                                                    
+                                                    [self.delegate twitterManagerDidApiError];
                                                     
                                                 }
                             
@@ -145,7 +145,7 @@
     
 }
 
-- (void)requestCreateFavorite:(NSString *)serialId {
+- (void)requestCreateFavorite:(NSString *)serialId accountIndex:(NSInteger)accountIndex {
     ACAccountType *accountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     [self.accountStore requestAccessToAccountsWithType:accountType
                                                options:nil
@@ -161,7 +161,7 @@
                                                                                                       URL:requestURL
                                                                                                parameters:param];
                                                     
-                                                    [request setAccount:[[self.accountStore accountsWithAccountType:accountType] objectAtIndex:0]];
+                                                    [request setAccount:[[self.accountStore accountsWithAccountType:accountType] objectAtIndex:accountIndex]];
                                                     
                                                     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
                                                         
@@ -171,6 +171,8 @@
                                                                 
                                                                 [self.delegate twitterManagerDidFavorite];
                                                                 
+                                                            } else {
+                                                                [self.delegate twitterManagerDidApiError];
                                                             }
                                                             
                                                         }
@@ -179,7 +181,7 @@
                                                     
                                                 } else {
                                                     
-                                                    
+                                                    [self.delegate twitterManagerDidApiError];
                                                     
                                                 }
                                                 

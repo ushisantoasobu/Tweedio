@@ -18,7 +18,8 @@
     tweet = [NSString stringWithFormat:@"%@%@", tweet, @" "];
     
     //リンク
-    NSString *pattern = @"http.* ";
+//    NSString *pattern = @"http.*! ";
+    NSString *pattern = @"https?://[¥w/:%#¥$&¥?¥(¥)~¥.=¥+¥-]+";
     NSString *replacement = @"、リンク、";
     
     NSRegularExpression *regexp = [NSRegularExpression
@@ -37,7 +38,6 @@
     NSLog(@"%@", str);
     
     //ハッシュタグ
-    
     pattern = @"#";
     replacement = @"、ハッシュタグ、";
     
@@ -56,9 +56,11 @@
     
     NSLog(@"%@", str2);
     
+    //リツイート
+    
+    
     //写真
     
-    //
     
     return str2;
 }

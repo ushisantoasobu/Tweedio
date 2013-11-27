@@ -19,6 +19,7 @@
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     float rate = [ud floatForKey:@"RATE"];
     float picth = [ud floatForKey:@"PITCH"];
+    int accountIndex = [ud integerForKey:@"ACCOUNT_INDEX"];
     
 //    data.rate = rate != [NSNull null] ? rate : data.rate;
 //    if(rate != 0){
@@ -30,6 +31,8 @@
     } else {
         data.pitchMultiplier = 0.5;
     }
+    
+    data.accountIndex = accountIndex;
     
     return data;
 }
@@ -55,6 +58,13 @@
     
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setFloat:pitch forKey:@"PITCH"];
+    
+    return YES;
+}
+
++(BOOL)setAccountIndex:(int)index {
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setFloat:index forKey:@"ACCOUNT_INDEX"];
     
     return YES;
 }

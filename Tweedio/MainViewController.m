@@ -34,8 +34,11 @@ typedef enum CurrentPlayPart:NSInteger {
 @property (nonatomic) enum CurrentPlayPart currentPlayPart;
 
 
-//次のアクション
+//twitterアカウント情報
 @property (nonatomic, strong) NSArray *accounts;
+
+//twitterアカウント
+@property (nonatomic) NSInteger accountIndex;
 
 //設定データモデル
 @property (nonatomic, strong) SettingData *settingData;
@@ -58,9 +61,11 @@ typedef enum CurrentPlayPart:NSInteger {
 
 
 
+
 @end
 
 @implementation MainViewController
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,6 +81,10 @@ typedef enum CurrentPlayPart:NSInteger {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+//    [self synthesizerTest];
+//    return;
+    
+    [self setupHeader];
     [self showLoading];
     [TwitterManager sharedManager].delegate = self;
     [[TwitterManager sharedManager] isAuthenticated];
@@ -88,11 +97,79 @@ typedef enum CurrentPlayPart:NSInteger {
 }
 
 
+
+- (void)setupHeader {
+    UIBarButtonItem *btnSave = [[UIBarButtonItem alloc]
+                                initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                target:self
+                                action:@selector(respondToBtnUpdate:)];
+    [btnSave setTintColor:[UIColor grayColor]];
+    self.navigationItem.rightBarButtonItem = btnSave;
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
+    
+    UIBarButtonItem *btnAccount = [[UIBarButtonItem alloc]
+                                initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize
+                                target:self
+                                action:@selector(respondToBtnAccount:)];
+    [btnSave setTintColor:[UIColor grayColor]];
+    self.navigationItem.leftBarButtonItem = btnAccount;
+    [self.navigationItem.leftBarButtonItem setEnabled:NO];
+}
+
+
+#pragma mark - synthesizerTest
+
+- (void)synthesizerTest {
+    
+    //synthesizerの設定
+    self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+    self.synthesizer.delegate = self;
+    
+    //設定準備
+    SettingData *data = [SettingDataManager getData];
+    self.settingData = data;
+    if (data.rate == AVSpeechUtteranceMaximumSpeechRate) {
+        [self.psc setSelectedSegmentIndex:2];
+    } else if (data.rate == AVSpeechUtteranceDefaultSpeechRate) {
+        [self.psc setSelectedSegmentIndex:1];
+    } else {
+        [self.psc setSelectedSegmentIndex:0];
+    }
+    
+    if([self.accounts count] <= data.accountIndex){
+        [SettingDataManager setAccountIndex:0];
+        self.settingData.accountIndex = 0;
+    }
+    self.accountIndex = self.settingData.accountIndex;
+    
+    NSString *testStr = @"こんなにもlateってかhttp.fdsafdsanvkdlafdaうこんの力";
+    
+    NSString *generatedTweet = [TweetUtil replaceForHearing:testStr];
+    
+    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:generatedTweet];
+    
+    //各種設定
+//    [utterance setRate              :self.settingData.rate];
+//    [utterance setPitchMultiplier   :self.settingData.pitchMultiplier];
+//    [utterance setVolume:0.70];
+    
+    AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
+    [utterance setVoice:voice];
+    
+    [self.synthesizer speakUtterance:utterance];
+}
+
+
 #pragma mark - initialSetting
 
 - (void)initialSetting {
     
     [self reset];
+    
+    //アカウント情報が複数あるとき
+    if ([self.accounts count] > 1) {
+        [self.navigationItem.leftBarButtonItem setEnabled:YES];
+    }
     
     //synthesizerの設定
     self.synthesizer = [[AVSpeechSynthesizer alloc] init];
@@ -114,7 +191,7 @@ typedef enum CurrentPlayPart:NSInteger {
     [self setHeader];
     
     //タイムラインの情報取得
-    [[TwitterManager sharedManager] requestTimeline];
+    [[TwitterManager sharedManager] requestTimeline:self.accountIndex];
 }
 
 /**
@@ -129,9 +206,13 @@ typedef enum CurrentPlayPart:NSInteger {
 
 #pragma mark - IBAction
 
-- (IBAction)respondToBtnUpdate:(id)sender {
+- (void)respondToBtnUpdate:(id)sender {
     [self stopWithNextAction:CURRENT_PLAY_PART_STOP];
     [self update];
+}
+
+- (void)respondToBtnAccount:(id)sender {
+    //
 }
 
 - (IBAction)respondToBtnBack:(id)sender {
@@ -185,9 +266,18 @@ typedef enum CurrentPlayPart:NSInteger {
     [self ringDeviceSound:1154];
 }
 
+- (void)ringError {
+    [self ringDeviceSound:1324];
+}
+
 - (void)ringStop {
     [self ringDeviceSound:1257];
 }
+
+- (void)ringFavorite {
+    [self ringDeviceSound:1325];
+}
+
 
 #pragma mark - operation
 
@@ -223,7 +313,7 @@ typedef enum CurrentPlayPart:NSInteger {
         //各種設定
         [utterance setRate              :self.settingData.rate];
         [utterance setPitchMultiplier   :self.settingData.pitchMultiplier];
-//        [utterance setVolume:0.80];
+        [utterance setVolume:0.70];
         
         AVSpeechSynthesisVoice *voice = [[AVSpeechSynthesisVoice alloc] init];
         [utterance setVoice:voice];
@@ -328,7 +418,7 @@ typedef enum CurrentPlayPart:NSInteger {
     [self stopWithNextAction:CURRENT_PLAY_PART_STOP];
     [self reset];
     
-    [[TwitterManager sharedManager] requestTimeline];
+    [[TwitterManager sharedManager] requestTimeline:self.accountIndex];
 }
 
 //現在のツイートをお気に入りに登録する
@@ -338,11 +428,14 @@ typedef enum CurrentPlayPart:NSInteger {
         return;
     }
     
+    [self ringFavorite];
+    
     [self stopWithNextAction:CURRENT_PLAY_PART_STOP];
     
     TweetData *data = [self.tweedDataList objectAtIndex:self.currentIndex];
     [self showLoading];
-    [[TwitterManager sharedManager] requestCreateFavorite:data.serialId];
+    [[TwitterManager sharedManager] requestCreateFavorite:data.serialId
+                                             accountIndex:self.accountIndex];
 }
 
 #pragma mark - AVSpeechSynthesizerDelegate
@@ -446,6 +539,7 @@ typedef enum CurrentPlayPart:NSInteger {
  * ツイッターAPIでエラーが返ってきたとき
  */
 - (void)twitterManagerDidApiError {
+    [self ringError];
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"alert"
                                                     message:@"エラーが発生しました"
                                                    delegate:nil

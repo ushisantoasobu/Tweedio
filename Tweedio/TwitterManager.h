@@ -25,7 +25,7 @@
 +(TwitterManager*)sharedManager;
 
 -(void)isAuthenticated;
--(void)requestTimeline;
--(void)requestCreateFavorite:(NSString *)serialId;
+-(void)requestTimeline:(NSInteger)accountIndex;
+-(void)requestCreateFavorite:(NSString *)serialId accountIndex:(NSInteger)accountIndex;
 
 @end

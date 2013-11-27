@@ -17,5 +17,6 @@
 
 +(BOOL)setRate:(float)rate;
 +(BOOL)setPitch:(float)pitch;
++(BOOL)setAccountIndex:(int)index;
 
 @end
