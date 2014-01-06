@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "TweetUtil.h"
 #import <AudioToolbox/AudioServices.h>
+#import <Accounts/Accounts.h>
 
 @interface MainViewController ()
 
@@ -166,6 +167,7 @@ typedef enum CurrentPlayPart:NSInteger {
     
     [self reset];
     
+    [self.navigationItem.rightBarButtonItem setEnabled:YES];
     //アカウント情報が複数あるとき
     if ([self.accounts count] > 1) {
         [self.navigationItem.leftBarButtonItem setEnabled:YES];
@@ -212,7 +214,11 @@ typedef enum CurrentPlayPart:NSInteger {
 }
 
 - (void)respondToBtnAccount:(id)sender {
-    //
+    UIPickerView *pv = [[UIPickerView alloc] init];
+//    piv.center = self.view.center;  // 中央に表示
+    pv.delegate = self;  // デリゲートを自分自身に設定
+    pv.dataSource = self;  // データソースを自分自身に設定
+    [self.view addSubview:pv];
 }
 
 - (IBAction)respondToBtnBack:(id)sender {
@@ -462,6 +468,33 @@ typedef enum CurrentPlayPart:NSInteger {
     } else {
         NSLog(@"ありえない");
     }
+}
+
+
+#pragma mark - UIPickerView
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView*)pickerView{
+    return 1;
+}
+
+// 行数を返す例
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+    return [self.accounts count];
+}
+
+// 表示する内容を返す例
+-(NSString*)pickerView:(UIPickerView*)pickerView
+           titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    
+    ACAccount *account = [self.accounts objectAtIndex:row];
+    return account.username;
+    
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    [SettingDataManager setAccountIndex:row];
+    self.accountIndex = row;
+    [self update];
 }
 
 #pragma mark - TwitterManagerDelegate

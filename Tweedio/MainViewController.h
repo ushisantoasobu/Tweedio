@@ -13,6 +13,8 @@
 #import "TweetData.h"
 
 @interface MainViewController : UIViewController<AVSpeechSynthesizerDelegate,
-TwitterManagerDelegate>
+TwitterManagerDelegate,
+UIPickerViewDelegate,
+UIPickerViewDataSource>
 
 @end
