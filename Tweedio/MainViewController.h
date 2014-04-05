@@ -11,10 +11,13 @@
 #import "TwitterManager.h"
 #import "SettingDataManager.h"
 #import "TweetData.h"
+#import <PebbleKit/PebbleKit.h>
 
 @interface MainViewController : UIViewController<AVSpeechSynthesizerDelegate,
 TwitterManagerDelegate,
 UIPickerViewDelegate,
 UIPickerViewDataSource>
+
+- (void)setPebbleWatch:(PBWatch *) watch;
 
 @end

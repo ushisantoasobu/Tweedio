@@ -14,55 +14,44 @@
     
     NSLog(@"%@", tweet);
     
-    //test 1文字足す
+    //test 1文字足す <- なんでだっけ？
     tweet = [NSString stringWithFormat:@"%@%@", tweet, @" "];
     
     //リンク
-//    NSString *pattern = @"http.*! ";
-    NSString *pattern = @"https?://[¥w/:%#¥$&¥?¥(¥)~¥.=¥+¥-]+";
-    NSString *replacement = @"、リンク、";
+    tweet = [TweetUtil replace:tweet
+                       pattern:@"(http://|https://){1}[\\w\\.\\-/:]+"
+                   replacement:@"、リンク、"];
     
+    tweet = [TweetUtil replace:tweet
+                       pattern:@"#"
+                   replacement:@"、ハッシュタグ、"];
+    
+    tweet = [TweetUtil replace:tweet
+                       pattern:@"RT(:| )"
+                   replacement:@"、リツイート、"];
+    
+    return tweet;
+}
+
++(NSString *)replace:(NSString *)orginal pattern:(NSString *)pattern replacement:(NSString *)replacement
+{
     NSRegularExpression *regexp = [NSRegularExpression
-                                   regularExpressionWithPattern:pattern
-                                   options:NSRegularExpressionCaseInsensitive
-                                   error:nil
-                                   ];
+              regularExpressionWithPattern:pattern
+              options:NSRegularExpressionCaseInsensitive
+              error:nil
+              ];
     
-    NSString *str = [regexp
-                     stringByReplacingMatchesInString:tweet
-                     options:NSMatchingReportProgress
-                     range:NSMakeRange(0, tweet.length)
-                     withTemplate:replacement
-                     ];
+    NSString *retStr = [regexp
+                      stringByReplacingMatchesInString:orginal
+                      options:NSMatchingReportProgress
+                      range:NSMakeRange(0, orginal.length)
+                      withTemplate:replacement
+                      ];
     
-    NSLog(@"%@", str);
-    
-    //ハッシュタグ
-    pattern = @"#";
-    replacement = @"、ハッシュタグ、";
-    
-    regexp = [NSRegularExpression
-                                   regularExpressionWithPattern:pattern
-                                   options:NSRegularExpressionCaseInsensitive
-                                   error:nil
-                                   ];
-    
-    NSString *str2 = [regexp
-                     stringByReplacingMatchesInString:str
-                     options:NSMatchingReportProgress
-                     range:NSMakeRange(0, str.length)
-                     withTemplate:replacement
-                     ];
-    
-    NSLog(@"%@", str2);
-    
-    //リツイート
+//    NSLog(@"%@", retStr);
     
     
-    //写真
-    
-    
-    return str2;
+    return retStr;
 }
 
 @end

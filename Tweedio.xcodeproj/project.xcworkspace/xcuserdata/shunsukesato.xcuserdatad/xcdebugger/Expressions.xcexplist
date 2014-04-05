@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "__34-[TwitterManager requestTimeline:]_block_invoke_2:TwitterManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "urlResponse.allHeaderFields">
+            </PersistentString>
+            <PersistentString
+               value = "urlResponse.statusCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__34-[TwitterManager requestTimeline:]_block_invoke:TwitterManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "acount.username">
+            </PersistentString>
+            <PersistentString
+               value = "[[self.accountStore accountsWithAccountType:accountType] objectAtIndex:0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__33-[TwitterManager isAuthenticated]_block_invoke:TwitterManager.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

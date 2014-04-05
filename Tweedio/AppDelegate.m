@@ -7,8 +7,15 @@
 //
 
 #import "AppDelegate.h"
+#import <PebbleKit/PebbleKit.h>
 
-@implementation AppDelegate
+@interface AppDelegate () <PBPebbleCentralDelegate>
+@end
+
+@implementation AppDelegate {
+    PBWatch *_targetWatch;
+    MainViewController *_main;
+}
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
@@ -23,15 +30,73 @@
 //    return YES;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    MainViewController *main = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
-    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:main];
+    _main = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:_main];
     [self.window makeKeyAndVisible];
     
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setCategory:AVAudioSessionCategoryPlayback error:nil];
     
+    //pebble from
+    [[PBPebbleCentral defaultCentral] setDelegate:self];
+    [self setTargetWatch:[[PBPebbleCentral defaultCentral] lastConnectedWatch]];
+    //pebble to
+    
     return YES;
 }
+
+//GolfDemoからもってきたまんま
+- (void)setTargetWatch:(PBWatch*)watch {
+    _targetWatch = watch;
+    
+    // NOTE:
+    // For demonstration purposes, we start communicating with the watch immediately upon connection,
+    // because we are calling -appMessagesGetIsSupported: here, which implicitely opens the communication session.
+    // Real world apps should communicate only if the user is actively using the app, because there
+    // is one communication session that is shared between all 3rd party iOS apps.
+    
+    // Test if the Pebble's firmware supports AppMessages / Golf:
+    [watch appMessagesGetIsSupported:^(PBWatch *watch, BOOL isAppMessagesSupported) {
+        if (isAppMessagesSupported) {
+            // Configure our communications channel to target the golf app:
+            [[PBPebbleCentral defaultCentral] setAppUUID:PBGolfUUID];
+            [_main setPebbleWatch:_targetWatch];
+//            [_appViewController setTargetWatch:_targetWatch];
+//            [_dataViewController setTargetWatch:_targetWatch];
+//            [_iconViewController setTargetWatch:_targetWatch];
+            
+            NSString *message = [NSString stringWithFormat:@"Yay! %@ supports AppMessages :D", [watch name]];
+            [[[UIAlertView alloc] initWithTitle:@"Connected!" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        } else {
+//            [_appViewController setTargetWatch:nil];
+//            [_dataViewController setTargetWatch:nil];
+//            [_iconViewController setTargetWatch:nil];
+            
+            NSString *message = [NSString stringWithFormat:@"Blegh... %@ does NOT support AppMessages :'(", [watch name]];
+            [[[UIAlertView alloc] initWithTitle:@"Connected..." message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        }
+    }];
+}
+
+/*
+ *  PBPebbleCentral delegate methods
+ */
+
+- (void)pebbleCentral:(PBPebbleCentral*)central watchDidConnect:(PBWatch*)watch isNew:(BOOL)isNew {
+    [self setTargetWatch:watch];
+}
+
+- (void)pebbleCentral:(PBPebbleCentral*)central watchDidDisconnect:(PBWatch*)watch {
+    [[[UIAlertView alloc] initWithTitle:@"Disconnected!" message:[watch name] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    if (_targetWatch == watch || [watch isEqual:_targetWatch]) {
+        [self setTargetWatch:nil];
+    }
+}
+
+
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

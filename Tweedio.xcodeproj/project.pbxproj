@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		D6615EC2180AF57400F83331 /* Warp1.caf in Resources */ = {isa = PBXBuildFile; fileRef = D6615EC1180AF57400F83331 /* Warp1.caf */; };
 		D6615EC5180B0D3800F83331 /* voice_of_light.caf in Resources */ = {isa = PBXBuildFile; fileRef = D6615EC4180B0D3800F83331 /* voice_of_light.caf */; };
+		D689D99618DF253C00228806 /* PebbleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D689D99518DF253C00228806 /* PebbleKit.framework */; };
+		D689D99818DF254D00228806 /* PebbleVendor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D689D99718DF254D00228806 /* PebbleVendor.framework */; };
+		D689D99A18DF256600228806 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D689D99918DF256600228806 /* CoreBluetooth.framework */; };
+		D689D99C18DF257600228806 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D689D99B18DF257600228806 /* ExternalAccessory.framework */; };
+		D689D99E18DF258800228806 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D689D99D18DF258800228806 /* libz.dylib */; };
+		D689D9A018DF259400228806 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D689D99F18DF259400228806 /* CoreMotion.framework */; };
+		D689D9A218DF25A100228806 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D689D9A118DF25A100228806 /* CFNetwork.framework */; };
+		D689D9A418DF25AD00228806 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D689D9A318DF25AD00228806 /* MessageUI.framework */; };
 		D68EE25317FF21E6007AEED2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE25217FF21E6007AEED2 /* Foundation.framework */; };
 		D68EE25517FF21E6007AEED2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE25417FF21E6007AEED2 /* CoreGraphics.framework */; };
 		D68EE25717FF21E6007AEED2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D68EE25617FF21E6007AEED2 /* UIKit.framework */; };
@@ -49,6 +57,14 @@
 /* Begin PBXFileReference section */
 		D6615EC1180AF57400F83331 /* Warp1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Warp1.caf; sourceTree = "<group>"; };
 		D6615EC4180B0D3800F83331 /* voice_of_light.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = voice_of_light.caf; sourceTree = "<group>"; };
+		D689D99518DF253C00228806 /* PebbleKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PebbleKit.framework; path = "../../../../pebble-dev/PebbleSDK-2.0.2/PebbleKit-iOS/PebbleKit.framework"; sourceTree = "<group>"; };
+		D689D99718DF254D00228806 /* PebbleVendor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PebbleVendor.framework; path = "../../../../pebble-dev/PebbleSDK-2.0.2/PebbleKit-iOS/PebbleVendor.framework"; sourceTree = "<group>"; };
+		D689D99918DF256600228806 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		D689D99B18DF257600228806 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		D689D99D18DF258800228806 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		D689D99F18DF259400228806 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		D689D9A118DF25A100228806 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D689D9A318DF25AD00228806 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D68EE24F17FF21E6007AEED2 /* Tweedio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tweedio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D68EE25217FF21E6007AEED2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D68EE25417FF21E6007AEED2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -90,11 +106,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D689D9A418DF25AD00228806 /* MessageUI.framework in Frameworks */,
+				D689D9A218DF25A100228806 /* CFNetwork.framework in Frameworks */,
+				D689D9A018DF259400228806 /* CoreMotion.framework in Frameworks */,
+				D689D99E18DF258800228806 /* libz.dylib in Frameworks */,
+				D689D99C18DF257600228806 /* ExternalAccessory.framework in Frameworks */,
+				D689D99A18DF256600228806 /* CoreBluetooth.framework in Frameworks */,
 				D6A4C2BE1802B09F00590813 /* AudioToolbox.framework in Frameworks */,
+				D689D99618DF253C00228806 /* PebbleKit.framework in Frameworks */,
 				D68EE28E17FF29EB007AEED2 /* Accounts.framework in Frameworks */,
 				D68EE28D17FF2593007AEED2 /* Social.framework in Frameworks */,
 				D68EE25517FF21E6007AEED2 /* CoreGraphics.framework in Frameworks */,
 				D68EE25917FF21E6007AEED2 /* CoreData.framework in Frameworks */,
+				D689D99818DF254D00228806 /* PebbleVendor.framework in Frameworks */,
 				D68EE25717FF21E6007AEED2 /* UIKit.framework in Frameworks */,
 				D68EE25317FF21E6007AEED2 /* Foundation.framework in Frameworks */,
 			);
@@ -136,6 +160,12 @@
 		D68EE25117FF21E6007AEED2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D689D9A318DF25AD00228806 /* MessageUI.framework */,
+				D689D9A118DF25A100228806 /* CFNetwork.framework */,
+				D689D99F18DF259400228806 /* CoreMotion.framework */,
+				D689D99D18DF258800228806 /* libz.dylib */,
+				D689D99B18DF257600228806 /* ExternalAccessory.framework */,
+				D689D99918DF256600228806 /* CoreBluetooth.framework */,
 				D6A4C2BD1802B09F00590813 /* AudioToolbox.framework */,
 				D68EE28C17FF2593007AEED2 /* Social.framework */,
 				D68EE28A17FF2298007AEED2 /* Accounts.framework */,
@@ -151,6 +181,8 @@
 		D68EE25A17FF21E6007AEED2 /* Tweedio */ = {
 			isa = PBXGroup;
 			children = (
+				D689D99718DF254D00228806 /* PebbleVendor.framework */,
+				D689D99518DF253C00228806 /* PebbleKit.framework */,
 				D68EE26317FF21E6007AEED2 /* AppDelegate.h */,
 				D68EE26417FF21E6007AEED2 /* AppDelegate.m */,
 				D68EE26917FF21E6007AEED2 /* Images.xcassets */,
@@ -446,9 +478,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/shunsukesato/pebble-dev/PebbleSDK-2.0.2/PebbleKit-iOS",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tweedio/Tweedio-Prefix.pch";
 				INFOPLIST_FILE = "Tweedio/Tweedio-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -459,9 +496,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/shunsukesato/pebble-dev/PebbleSDK-2.0.2/PebbleKit-iOS",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tweedio/Tweedio-Prefix.pch";
 				INFOPLIST_FILE = "Tweedio/Tweedio-Info.plist";
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

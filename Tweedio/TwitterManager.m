@@ -83,19 +83,20 @@
                                                options:nil
                                             completion:^(BOOL granted, NSError *error) {
                                                 
-                                                NSLog(@"granted:%hhd", granted);
+                                                NSLog(@"granted:%d", granted);
                                                 
                                                 if (granted) {
                                                     
-                                                    NSDictionary *param = [NSDictionary dictionaryWithObject:@"200" forKey:@"count"];
+                                                    NSDictionary *param = [NSDictionary dictionaryWithObject:@"100" forKey:@"count"];
                                                 
                                                 NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/home_timeline.json"];
                                                 SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter
                                                                                         requestMethod:SLRequestMethodGET
                                                                                                   URL:requestURL
                                                                                            parameters:param];
-                                                
-                                                 [request setAccount:[[self.accountStore accountsWithAccountType:accountType] objectAtIndex:accountIndex]];
+                                                    
+                                                    ACAccount *acount = [[self.accountStore accountsWithAccountType:accountType] objectAtIndex:accountIndex];
+                                                 [request setAccount:acount];
                                                 
                                                     [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
                                                        

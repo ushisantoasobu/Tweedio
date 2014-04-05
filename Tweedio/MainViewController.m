@@ -11,7 +11,11 @@
 #import <AudioToolbox/AudioServices.h>
 #import <Accounts/Accounts.h>
 
-@interface MainViewController ()
+
+@interface MainViewController () {
+    PBWatch *_targetWatch;
+    Boolean _isTimer; //****
+}
 
 
 //ツイート情報のリスト
@@ -206,6 +210,21 @@ typedef enum CurrentPlayPart:NSInteger {
 }
 
 
+- (void)setPebbleWatch:(PBWatch *) watch {
+    _targetWatch = watch;
+    
+    //test pebble
+    [_targetWatch golfAppLaunch:^(PBWatch *watch, NSError *error) {
+        if (error) {
+            NSLog(@"error");
+        } else {
+            NSLog(@"success");
+        }
+    }];
+    //test pebble
+}
+
+
 #pragma mark - IBAction
 
 - (void)respondToBtnUpdate:(id)sender {
@@ -343,6 +362,25 @@ typedef enum CurrentPlayPart:NSInteger {
     if([self.synthesizer isSpeaking]) {
         self.currentPlayPart = nextAction;
         [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+        _isTimer = YES;
+        NSTimer *tm = [NSTimer scheduledTimerWithTimeInterval:0.5f
+                                                       target:self
+                                                     selector:@selector(hoge:)
+                                                     userInfo:nil
+                                                      repeats:NO];
+    }
+}
+
+// 呼ばれるhogeメソッド
+-(void)hoge:(NSTimer*)timer{
+    //もしタイマーが回っていたら（=stopしたときにdidFinishSpeechUtteranceを受け取らなかったとき）
+    if(_isTimer == YES)
+    {
+        _isTimer = NO;
+        if(self.currentPlayPart == CURRENT_PLAY_PART_NEXT){
+            self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
+            [self play];
+        }
     }
 }
 
@@ -453,21 +491,32 @@ typedef enum CurrentPlayPart:NSInteger {
  */
 - (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance {
     NSLog(@"didFinishSpeechUtterance");
-    if(self.currentPlayPart == CURRENT_PLAY_PART_USER_NAME){
-        self.currentPlayPart = CURRENT_PLAY_PART_BODY;
-        [self play];
-    } else if(self.currentPlayPart == CURRENT_PLAY_PART_BODY){
-        self.currentIndex++;
-        self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
-        [self play];
-    } else if(self.currentPlayPart == CURRENT_PLAY_PART_STOP){
-        self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
-    } else if(self.currentPlayPart == CURRENT_PLAY_PART_NEXT){
-        self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
-        [self play];
-    } else {
-        NSLog(@"ありえない");
+    if(_isTimer == YES){
+        _isTimer = NO;
+        if(self.currentPlayPart == CURRENT_PLAY_PART_NEXT){
+            self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
+            [self play];
+        } else {
+            NSLog(@"ありえない");
+        }
+    }else{
+        if(self.currentPlayPart == CURRENT_PLAY_PART_USER_NAME){
+            self.currentPlayPart = CURRENT_PLAY_PART_BODY;
+            [self play];
+        } else if(self.currentPlayPart == CURRENT_PLAY_PART_BODY){
+            self.currentIndex++;
+            self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
+            [self play];
+        } else if(self.currentPlayPart == CURRENT_PLAY_PART_STOP){
+            self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
+        } else if(self.currentPlayPart == CURRENT_PLAY_PART_NEXT){
+            self.currentPlayPart = CURRENT_PLAY_PART_USER_NAME;
+            [self play];
+        } else {
+            NSLog(@"ありえない");
+        }
     }
+
 }
 
 
@@ -500,7 +549,7 @@ typedef enum CurrentPlayPart:NSInteger {
 #pragma mark - TwitterManagerDelegate
 
 - (void)twitterManagerDidAuthenticated:(BOOL)boolean account:(NSArray *)accounts{
-    if (boolean) {
+    if (boolean && [accounts count] > 0 ) {
         self.accounts = accounts;
         [self initialSetting];
     } else {
